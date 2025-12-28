@@ -1,0 +1,32 @@
+/* Specific button for Ahmet Museum */
+#ahmet-btn {
+    background-color: aliceblue;
+    color: #153dee;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+#ahmet-btn:hover {
+    box-shadow: 0 0 10px #02e3ff;
+}
+
+/* The Grid Container */
+#ahmet-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px; /* Slightly bigger gap looks better with smaller photos */
+    padding: 70px;
+}
+
+/* The Images - RESIZED */
+#ahmet-container img {
+    width: 100%;
+    max-width: 250px; /* This is where the magic happens! */
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    margin: 0 auto; /* Centers the image in its grid cell */
+}
