@@ -67,14 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             listEl.innerHTML = '';
 
             if (titleEl) {
-                const old = titleEl.querySelector('.comment-count-badge');
-                if (old) old.remove();
-                if (snap.size > 0) {
-                    const badge = document.createElement('span');
-                    badge.className = 'comment-count-badge';
-                    badge.textContent = snap.size;
-                    titleEl.appendChild(badge);
-                }
+                titleEl.textContent = snap.size > 0 ? `(${snap.size})` : '';
             }
 
             if (snap.empty) {

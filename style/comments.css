@@ -1,231 +1,109 @@
-/* ── About page two-part layout ──────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   STEAM PROFILE COMMENT STYLE
+   ═══════════════════════════════════════════════════════════ */
 
+/* ── About hero (top half) ──────────────────────────────── */
 #about-hero {
-    padding: 120px 20px 60px;
+    padding: 120px 20px 50px;
     text-align: center;
 }
 
-/* Stop the global h1 margin from pushing things */
 #about-hero h1 {
     margin-top: 0;
 }
 
-/* ── Comments panel ───────────────────────────────────────── */
+/* ── Steam panel wrapper ─────────────────────────────────── */
 #comments-section {
-    background: rgba(5, 12, 24, 0.78);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-top: 1px solid rgba(91, 111, 222, 0.3);
-    padding: 40px 24px 60px;
-    text-align: left;
+    max-width: 640px;
+    margin: 0 auto 80px;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    background: transparent;
+    font-family: 'Motiva Sans', Arial, Helvetica, sans-serif;
 }
 
-.comments-top-row {
+/* ── Panel header bar ────────────────────────────────────── */
+.steam-header {
     display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin-bottom: 22px;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: rgba(0, 0, 0, 0.55);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.steam-header-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #8b98a0;
+    letter-spacing: 1px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #comments-title {
-    font-size: 0.8rem;
-    color: #8aaabf;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 600;
+    font-size: 0.72rem;
+    color: #556772;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.comments-hint {
-    font-size: 0.78rem;
-    color: #3f5268;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* ── Firebase warning ─────────────────────────────────────── */
+/* ── Firebase warning ────────────────────────────────────── */
 #firebase-setup-warning {
-    background: rgba(255, 100, 60, 0.1);
-    border: 1px solid rgba(255, 100, 60, 0.4);
-    border-radius: 10px;
-    padding: 12px 18px;
-    margin-bottom: 20px;
+    background: rgba(180, 80, 30, 0.25);
+    border-bottom: 1px solid rgba(180, 80, 30, 0.4);
+    padding: 10px 14px;
     color: #ffb89a;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: none;
-}
-
-/* ── Post form ────────────────────────────────────────────── */
-.comment-form-box {
-    background: rgba(10, 20, 38, 0.7);
-    border: 1px solid rgba(91, 111, 222, 0.3);
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 28px;
-    max-width: 680px;
-}
-
-/* ── Avatar picker ────────────────────────────────────────── */
-#avatar-picker {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-}
-
-.picker-label {
-    font-size: 0.78rem;
-    color: #4a6278;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    flex-shrink: 0;
-}
-
-.picker-row {
-    display: flex;
-    gap: 7px;
-    flex-wrap: wrap;
-}
-
-.av-opt {
-    width: 26px;
-    height: 26px;
-    border-radius: 5px;
-    border: 2px solid transparent;
-    cursor: pointer;
-    padding: 0;
-    transition: transform 0.15s, border-color 0.15s;
-    flex-shrink: 0;
-}
-
-.av-opt:hover {
-    transform: scale(1.18);
-}
-
-.av-opt.selected {
-    border-color: #fff;
-    transform: scale(1.22);
-    box-shadow: 0 0 8px rgba(255,255,255,0.35);
-}
-
-/* ── Form inputs ──────────────────────────────────────────── */
-.comment-form-box input[type="text"],
-.comment-form-box textarea {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(91, 111, 222, 0.25);
-    border-radius: 7px;
-    color: #dce8f5;
-    padding: 9px 13px;
-    font-size: 0.9rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    box-sizing: border-box;
-    margin-bottom: 9px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    resize: none;
-}
-
-.comment-form-box input[type="text"]::placeholder,
-.comment-form-box textarea::placeholder {
-    color: #364858;
-}
-
-.comment-form-box input[type="text"]:focus,
-.comment-form-box textarea:focus {
-    outline: none;
-    border-color: #5b6fde;
-    box-shadow: 0 0 0 3px rgba(91,111,222,0.12);
-}
-
-.comment-form-box textarea {
-    height: 72px;
-}
-
-.comment-form-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#char-count {
     font-size: 0.8rem;
-    color: #364858;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    transition: color 0.2s;
+    line-height: 1.5;
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-#comment-submit {
-    background: linear-gradient(135deg, #5b6fde, #3a52c4);
-    color: #fff;
-    border: none;
-    border-radius: 7px;
-    padding: 8px 26px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    cursor: pointer;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
-    box-shadow: 0 2px 12px rgba(91,111,222,0.35);
-}
-
-#comment-submit:hover:not(:disabled) {
-    opacity: 0.85;
-    box-shadow: 0 4px 18px rgba(91,111,222,0.55);
-}
-
-#comment-submit:active:not(:disabled) { transform: scale(0.97); }
-#comment-submit:disabled { opacity: 0.4; cursor: not-allowed; }
-
-/* ── Comment bubbles (Steam layout) ──────────────────────── */
+/* ── Comment rows ────────────────────────────────────────── */
 #comments-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    max-width: 680px;
 }
 
 .comment-bubble {
     display: flex;
-    gap: 12px;
+    gap: 0;
     align-items: flex-start;
-    background: rgba(10, 20, 38, 0.55);
-    border: 1px solid rgba(91, 111, 222, 0.15);
-    border-radius: 8px;
-    padding: 12px 14px;
-    animation: slideUp 0.25s ease forwards;
-    transition: border-color 0.2s, background 0.2s;
+    background: rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    padding: 10px 14px;
+    transition: background 0.15s;
+    animation: fadeRow 0.2s ease forwards;
 }
 
 .comment-bubble:hover {
-    border-color: rgba(91,111,222,0.4);
-    background: rgba(10, 20, 38, 0.75);
+    background: rgba(0, 0, 0, 0.4);
 }
 
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+.comment-bubble:last-child {
+    border-bottom: none;
 }
 
-/* Steam-style square avatar */
+@keyframes fadeRow {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Square Steam-style avatar */
 .comment-avatar {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
-    border-radius: 5px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 0.85rem;
     color: #fff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right: 10px;
+    flex-shrink: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .comment-body {
@@ -237,55 +115,178 @@
     display: flex;
     align-items: baseline;
     gap: 8px;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     flex-wrap: wrap;
 }
 
+/* Steam cyan username */
 .comment-name {
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: #c6d4df;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.82rem;
+    font-weight: bold;
+    color: #67c1f5;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
 }
 
 .comment-time {
-    font-size: 0.76rem;
-    color: #344a5e;
+    font-size: 0.72rem;
+    color: #556772;
     margin-left: auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     white-space: nowrap;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Comment text */
 .comment-text {
-    color: #8fafc8 !important;
-    font-size: 0.88rem !important;
-    line-height: 1.55 !important;
+    color: #c6d4df !important;
+    font-size: 0.82rem !important;
+    line-height: 1.5 !important;
     margin: 0 !important;
     max-width: 100% !important;
     word-break: break-word;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .no-comments {
-    color: #2e4156 !important;
-    font-size: 0.85rem !important;
+    color: #4a5c68 !important;
+    font-size: 0.8rem !important;
     text-align: center !important;
-    padding: 32px !important;
-    font-style: italic;
+    padding: 28px 14px !important;
     margin: 0 !important;
     max-width: 100% !important;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-style: italic;
 }
 
-/* Count badge next to title */
-.comment-count-badge {
-    display: inline-block;
-    background: rgba(91,111,222,0.2);
-    color: #5b7a9a;
-    border-radius: 20px;
-    padding: 1px 8px;
+/* ── Post form (bottom, Steam style) ────────────────────── */
+.steam-form-area {
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 12px 14px;
+}
+
+.steam-form-label {
+    color: #8b98a0 !important;
+    font-size: 0.75rem !important;
+    margin: 0 0 8px 0 !important;
+    max-width: 100% !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-style: normal !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ── Avatar colour picker ────────────────────────────────── */
+#avatar-picker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.picker-label {
+    font-size: 0.7rem;
+    color: #556772;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+}
+
+.picker-row {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.av-opt {
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.12s, border-color 0.12s;
+    flex-shrink: 0;
+}
+
+.av-opt:hover { transform: scale(1.2); }
+
+.av-opt.selected {
+    border-color: #c6d4df;
+    transform: scale(1.25);
+}
+
+/* ── Form inputs ─────────────────────────────────────────── */
+#comment-form input[type="text"],
+#comment-form textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid #3d4b57;
+    border-radius: 2px;
+    color: #c6d4df;
+    padding: 7px 10px;
+    font-size: 0.82rem;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    margin-bottom: 6px;
+    resize: none;
+    transition: border-color 0.2s;
+}
+
+#comment-form input[type="text"]::placeholder,
+#comment-form textarea::placeholder {
+    color: #3d4b57;
+}
+
+#comment-form input[type="text"]:focus,
+#comment-form textarea:focus {
+    outline: none;
+    border-color: #67c1f5;
+}
+
+#comment-form textarea {
+    height: 64px;
+}
+
+.steam-submit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#char-count {
     font-size: 0.72rem;
-    margin-left: 8px;
-    vertical-align: middle;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #3d4b57;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: color 0.2s;
+}
+
+/* Steam "Post Comment" button */
+#comment-submit {
+    background: linear-gradient(to bottom, #4e7d10, #3a5e0c);
+    color: #d2e885;
+    border: none;
+    border-radius: 2px;
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: filter 0.15s;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+#comment-submit:hover:not(:disabled) { filter: brightness(1.15); }
+#comment-submit:active:not(:disabled) { filter: brightness(0.9); }
+#comment-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Comment count next to header */
+.comment-count-badge {
+    font-size: 0.72rem;
+    color: #556772;
+    font-family: Arial, Helvetica, sans-serif;
 }

@@ -28,24 +28,29 @@
         <p>Welcome to my first website, I don't actually use here at all but maybe I'll consider putting more in the future.</p>
       </div>
 
-      <!-- Bottom half: comments -->
+      <!-- Bottom half: Steam-style comments -->
       <div id="comments-section">
 
-        <div class="comments-top-row">
-          <h2 id="comments-title">Visitor Messages</h2>
-          <span class="comments-hint">No account needed — just type and post.</span>
+        <!-- Steam panel header -->
+        <div class="steam-header">
+          <span class="steam-header-title">COMMENTS</span>
+          <span id="comments-title"></span>
         </div>
 
         <div id="firebase-setup-warning">
           ⚠️ <strong>Setup needed:</strong> Open <code>js/comments.js</code> and follow the setup instructions at the top of the file.
         </div>
 
-        <!-- Form -->
-        <div class="comment-form-box">
+        <!-- Comments feed -->
+        <div id="comments-list"></div>
 
-          <!-- Avatar color picker (optional) -->
+        <!-- Post form — at the bottom like Steam -->
+        <div class="steam-form-area">
+          <p class="steam-form-label">Leave a comment:</p>
+
+          <!-- Avatar colour picker -->
           <div id="avatar-picker">
-            <span class="picker-label">Avatar colour</span>
+            <span class="picker-label">Colour</span>
             <div class="picker-row">
               <button type="button" class="av-opt selected" data-color="#5b6fde" style="background:#5b6fde"></button>
               <button type="button" class="av-opt" data-color="#3b82f6" style="background:#3b82f6"></button>
@@ -60,16 +65,15 @@
 
           <form id="comment-form" autocomplete="off">
             <input type="hidden" id="comment-avatar-color" value="#5b6fde">
-            <input type="text" id="comment-name" placeholder="Name  (optional — leave blank for Anonymous)" maxlength="32">
-            <textarea id="comment-message" placeholder="Leave a message..." maxlength="300" required></textarea>
-            <div class="comment-form-footer">
+            <input type="text" id="comment-name" placeholder="Name (optional)" maxlength="32">
+            <textarea id="comment-message" placeholder="Write something..." maxlength="300" required></textarea>
+            <div class="steam-submit-row">
               <span id="char-count">300</span>
-              <button type="submit" id="comment-submit">POST</button>
+              <button type="submit" id="comment-submit">Post Comment</button>
             </div>
           </form>
         </div>
 
-        <div id="comments-list"></div>
       </div>
     </section>
 
