@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="style/about.css">
     <link rel="stylesheet" href="style/gallery.css">
     <link rel="stylesheet" href="style/ahmet.css">
+    <link rel="stylesheet" href="style/comments.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>Esef</title>
   </head>
@@ -20,8 +21,56 @@
     </div>
 
     <section id="about" class="tab-content">
-      <h1>Hello!!!!</h1>
-      <p>Welcome to my first website, I don't actually use here at all but maybe I'll consider putting more in the future.</p>
+
+      <!-- Top half: welcome -->
+      <div id="about-hero">
+        <h1>Hello!!!!</h1>
+        <p>Welcome to my first website, I don't actually use here at all but maybe I'll consider putting more in the future.</p>
+      </div>
+
+      <!-- Bottom half: comments -->
+      <div id="comments-section">
+
+        <div class="comments-top-row">
+          <h2 id="comments-title">Visitor Messages</h2>
+          <span class="comments-hint">No account needed — just type and post.</span>
+        </div>
+
+        <div id="firebase-setup-warning">
+          ⚠️ <strong>Setup needed:</strong> Open <code>js/comments.js</code> and follow the setup instructions at the top of the file.
+        </div>
+
+        <!-- Form -->
+        <div class="comment-form-box">
+
+          <!-- Avatar color picker (optional) -->
+          <div id="avatar-picker">
+            <span class="picker-label">Avatar colour</span>
+            <div class="picker-row">
+              <button type="button" class="av-opt selected" data-color="#5b6fde" style="background:#5b6fde"></button>
+              <button type="button" class="av-opt" data-color="#3b82f6" style="background:#3b82f6"></button>
+              <button type="button" class="av-opt" data-color="#10b981" style="background:#10b981"></button>
+              <button type="button" class="av-opt" data-color="#f59e0b" style="background:#f59e0b"></button>
+              <button type="button" class="av-opt" data-color="#ef4444" style="background:#ef4444"></button>
+              <button type="button" class="av-opt" data-color="#8b5cf6" style="background:#8b5cf6"></button>
+              <button type="button" class="av-opt" data-color="#ec4899" style="background:#ec4899"></button>
+              <button type="button" class="av-opt" data-color="#64748b" style="background:#64748b"></button>
+            </div>
+          </div>
+
+          <form id="comment-form" autocomplete="off">
+            <input type="hidden" id="comment-avatar-color" value="#5b6fde">
+            <input type="text" id="comment-name" placeholder="Name  (optional — leave blank for Anonymous)" maxlength="32">
+            <textarea id="comment-message" placeholder="Leave a message..." maxlength="300" required></textarea>
+            <div class="comment-form-footer">
+              <span id="char-count">300</span>
+              <button type="submit" id="comment-submit">POST</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="comments-list"></div>
+      </div>
     </section>
 
     <section id="gallery" class="tab-content">
@@ -38,5 +87,10 @@
     <script src="js/gallery.js" defer></script>
     <script src="js/hideBroken.js" defer></script>
     <script src="js/tabs.js" defer></script>
+
+    <!-- Firebase SDK (loaded before comments.js) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    <script src="js/comments.js"></script>
     </body>
 </html>

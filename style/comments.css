@@ -1,0 +1,291 @@
+/* ── About page two-part layout ──────────────────────────── */
+
+#about-hero {
+    padding: 120px 20px 60px;
+    text-align: center;
+}
+
+/* Stop the global h1 margin from pushing things */
+#about-hero h1 {
+    margin-top: 0;
+}
+
+/* ── Comments panel ───────────────────────────────────────── */
+#comments-section {
+    background: rgba(5, 12, 24, 0.78);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-top: 1px solid rgba(91, 111, 222, 0.3);
+    padding: 40px 24px 60px;
+    text-align: left;
+}
+
+.comments-top-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+
+#comments-title {
+    font-size: 0.8rem;
+    color: #8aaabf;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 600;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.comments-hint {
+    font-size: 0.78rem;
+    color: #3f5268;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ── Firebase warning ─────────────────────────────────────── */
+#firebase-setup-warning {
+    background: rgba(255, 100, 60, 0.1);
+    border: 1px solid rgba(255, 100, 60, 0.4);
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    color: #ffb89a;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: none;
+}
+
+/* ── Post form ────────────────────────────────────────────── */
+.comment-form-box {
+    background: rgba(10, 20, 38, 0.7);
+    border: 1px solid rgba(91, 111, 222, 0.3);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 28px;
+    max-width: 680px;
+}
+
+/* ── Avatar picker ────────────────────────────────────────── */
+#avatar-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.picker-label {
+    font-size: 0.78rem;
+    color: #4a6278;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+}
+
+.picker-row {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.av-opt {
+    width: 26px;
+    height: 26px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+}
+
+.av-opt:hover {
+    transform: scale(1.18);
+}
+
+.av-opt.selected {
+    border-color: #fff;
+    transform: scale(1.22);
+    box-shadow: 0 0 8px rgba(255,255,255,0.35);
+}
+
+/* ── Form inputs ──────────────────────────────────────────── */
+.comment-form-box input[type="text"],
+.comment-form-box textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(91, 111, 222, 0.25);
+    border-radius: 7px;
+    color: #dce8f5;
+    padding: 9px 13px;
+    font-size: 0.9rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    margin-bottom: 9px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: none;
+}
+
+.comment-form-box input[type="text"]::placeholder,
+.comment-form-box textarea::placeholder {
+    color: #364858;
+}
+
+.comment-form-box input[type="text"]:focus,
+.comment-form-box textarea:focus {
+    outline: none;
+    border-color: #5b6fde;
+    box-shadow: 0 0 0 3px rgba(91,111,222,0.12);
+}
+
+.comment-form-box textarea {
+    height: 72px;
+}
+
+.comment-form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#char-count {
+    font-size: 0.8rem;
+    color: #364858;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: color 0.2s;
+}
+
+#comment-submit {
+    background: linear-gradient(135deg, #5b6fde, #3a52c4);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 8px 26px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(91,111,222,0.35);
+}
+
+#comment-submit:hover:not(:disabled) {
+    opacity: 0.85;
+    box-shadow: 0 4px 18px rgba(91,111,222,0.55);
+}
+
+#comment-submit:active:not(:disabled) { transform: scale(0.97); }
+#comment-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Comment bubbles (Steam layout) ──────────────────────── */
+#comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 680px;
+}
+
+.comment-bubble {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: rgba(10, 20, 38, 0.55);
+    border: 1px solid rgba(91, 111, 222, 0.15);
+    border-radius: 8px;
+    padding: 12px 14px;
+    animation: slideUp 0.25s ease forwards;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.comment-bubble:hover {
+    border-color: rgba(91,111,222,0.4);
+    background: rgba(10, 20, 38, 0.75);
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Steam-style square avatar */
+.comment-avatar {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.comment-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.comment-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.comment-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #c6d4df;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.comment-time {
+    font-size: 0.76rem;
+    color: #344a5e;
+    margin-left: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    white-space: nowrap;
+}
+
+.comment-text {
+    color: #8fafc8 !important;
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    word-break: break-word;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.no-comments {
+    color: #2e4156 !important;
+    font-size: 0.85rem !important;
+    text-align: center !important;
+    padding: 32px !important;
+    font-style: italic;
+    margin: 0 !important;
+    max-width: 100% !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Count badge next to title */
+.comment-count-badge {
+    display: inline-block;
+    background: rgba(91,111,222,0.2);
+    color: #5b7a9a;
+    border-radius: 20px;
+    padding: 1px 8px;
+    font-size: 0.72rem;
+    margin-left: 8px;
+    vertical-align: middle;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
