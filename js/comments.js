@@ -107,21 +107,57 @@ document.addEventListener('DOMContentLoaded', () => {
     firebase.initializeApp(FIREBASE_CONFIG);
     const db = firebase.firestore();
 
-    // ── Real-time feed ───────────────────────────────────────────
+    // ── Real-time feed & Pagination ──────────────────────────────
+    let allComments = [];
+    let currentPage = 1;
+    const COMMENTS_PER_PAGE = 5;
+    const paginationEl = document.getElementById('comments-pagination');
+
+    function renderPage() {
+        listEl.innerHTML = '';
+        if (paginationEl) paginationEl.innerHTML = '';
+
+        if (allComments.length === 0) {
+            listEl.innerHTML = '<p class="no-comments">No messages yet — be the first!</p>';
+            return;
+        }
+
+        const totalPages = Math.ceil(allComments.length / COMMENTS_PER_PAGE);
+        if (currentPage > totalPages) currentPage = totalPages;
+        if (currentPage < 1) currentPage = 1;
+
+        const start = (currentPage - 1) * COMMENTS_PER_PAGE;
+        const end = start + COMMENTS_PER_PAGE;
+        const slice = allComments.slice(start, end);
+
+        slice.forEach(data => listEl.appendChild(buildBubble(data)));
+
+        // Build pagination controls
+        if (totalPages > 1 && paginationEl) {
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'steam-page-btn' + (i === currentPage ? ' active' : '');
+                btn.textContent = i;
+                btn.onclick = () => {
+                    currentPage = i;
+                    renderPage();
+                };
+                paginationEl.appendChild(btn);
+            }
+        }
+    }
+
     db.collection(COLLECTION)
         .orderBy('timestamp', 'desc')
         .onSnapshot(snap => {
-            listEl.innerHTML = '';
-
             if (titleEl) {
                 titleEl.textContent = snap.size > 0 ? `(${snap.size})` : '';
             }
 
-            if (snap.empty) {
-                listEl.innerHTML = '<p class="no-comments">No messages yet — be the first!</p>';
-                return;
-            }
-            snap.forEach(doc => listEl.appendChild(buildBubble(doc.data())));
+            allComments = [];
+            snap.forEach(doc => allComments.push(doc.data()));
+            
+            renderPage();
 
         }, err => {
             console.error(err);

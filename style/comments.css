@@ -270,24 +270,26 @@
 
 /* Steam "Post Comment" button */
 #comment-submit {
-    background: linear-gradient(to bottom, #4e7d10, #3a5e0c);
-    color: #d2e885;
-    border: none;
-    border-radius: 2px;
-    padding: 6px 16px;
-    font-size: 0.8rem;
-    font-family: Arial, Helvetica, sans-serif;
+    background: #02e3ff;
+    border: 1px solid #00c0d8;
+    color: #000000;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
     font-weight: bold;
     cursor: pointer;
-    letter-spacing: 0.5px;
-    transition: filter 0.15s;
-    text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    transition: background 0.15s, transform 0.1s;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(2, 227, 255, 0.4);
 }
 
-#comment-submit:hover:not(:disabled) { filter: brightness(1.15); }
-#comment-submit:active:not(:disabled) { filter: brightness(0.9); }
-#comment-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+#comment-submit:hover:not(:disabled) {
+    background: #ffffff;
+    box-shadow: 0 0 15px rgba(2, 227, 255, 0.8);
+    transform: scale(1.05);
+}
+#comment-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
 
 /* Comment count next to header */
 .comment-count-badge {
@@ -350,4 +352,37 @@
 
 .pfp-clear:hover {
     color: #ff7070;
+}
+
+/* ── Pagination ──────────────────────────────────────────── */
+.steam-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.steam-page-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #c6d4df;
+    padding: 6px 12px;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.steam-page-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.steam-page-btn.active {
+    background: #02e3ff;
+    border-color: #00c0d8;
+    color: #000;
+    font-weight: bold;
 }
