@@ -21,6 +21,7 @@
     box-sizing: border-box;
     background: transparent;
     font-family: 'Motiva Sans', Arial, Helvetica, sans-serif;
+    text-align: left;
 }
 
 /* ── Panel header bar ────────────────────────────────────── */
@@ -121,11 +122,11 @@
     flex-wrap: wrap;
 }
 
-/* Steam cyan username */
+/* Steam cyan username -> Now Black */
 .comment-name {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     font-weight: bold;
-    color: #67c1f5;
+    color: #000000;
     font-family: Arial, Helvetica, sans-serif;
     text-decoration: none;
 }
@@ -140,8 +141,9 @@
 
 /* Comment text */
 .comment-text {
-    color: #c6d4df !important;
-    font-size: 0.82rem !important;
+    color: #000000 !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
     line-height: 1.5 !important;
     margin: 0 !important;
     max-width: 100% !important;
@@ -302,20 +304,24 @@
 }
 
 .pfp-upload-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #c6d4df;
-    padding: 3px 8px;
-    border-radius: 2px;
-    font-size: 0.7rem;
+    background: #02e3ff;
+    border: 1px solid #00c0d8;
+    color: #000000;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: background 0.15s;
+    transition: background 0.15s, transform 0.1s;
     font-family: Arial, Helvetica, sans-serif;
     text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(2, 227, 255, 0.4);
 }
 
 .pfp-upload-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: #ffffff;
+    box-shadow: 0 0 15px rgba(2, 227, 255, 0.8);
+    transform: scale(1.05);
 }
 
 .pfp-preview {
