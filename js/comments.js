@@ -150,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Global Click Counter ─────────────────────────────────────
     const clickBtn = document.getElementById('yuuka-click-btn');
     const clickDisplay = document.getElementById('click-counter-display');
+    const clickSound = new Audio('sounds/yuuka_click.mp3');
     
     if (clickBtn && clickDisplay && configured) {
         const statsRef = db.collection('stats').doc('global_clicks');
@@ -168,6 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Increment on click
         clickBtn.addEventListener('click', () => {
+            // Play sound
+            clickSound.currentTime = 0; // Reset to allow rapid clicking
+            clickSound.play().catch(e => console.error("Audio play failed:", e));
+
             // Optimistic update for instant feel
             let current = parseInt(clickDisplay.textContent.replace(/,/g, '')) || 0;
             clickDisplay.textContent = (current + 1).toLocaleString();
