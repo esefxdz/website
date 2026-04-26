@@ -46,6 +46,17 @@
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.8);
+    line-height: 1;
+}
+
+#click-counter-label {
+    color: #556772;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: -10px;
+    letter-spacing: 1px;
 }
 
 /* ── Steam panel wrapper ─────────────────────────────────── */
