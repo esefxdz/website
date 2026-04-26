@@ -147,6 +147,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ── Global Click Counter ─────────────────────────────────────
+    const clickBtn = document.getElementById('yuuka-click-btn');
+    const clickDisplay = document.getElementById('click-counter-display');
+    
+    if (clickBtn && clickDisplay && configured) {
+        const statsRef = db.collection('stats').doc('global_clicks');
+        
+        // Listen to changes in real-time
+        statsRef.onSnapshot(doc => {
+            if (doc.exists) {
+                clickDisplay.textContent = doc.data().count.toLocaleString();
+            } else {
+                clickDisplay.textContent = '0';
+            }
+        }, err => {
+            console.error("Click counter error:", err);
+            clickDisplay.textContent = 'Error';
+        });
+
+        // Increment on click
+        clickBtn.addEventListener('click', () => {
+            // Optimistic update for instant feel
+            let current = parseInt(clickDisplay.textContent.replace(/,/g, '')) || 0;
+            clickDisplay.textContent = (current + 1).toLocaleString();
+            
+            statsRef.set({
+                count: firebase.firestore.FieldValue.increment(1)
+            }, { merge: true }).catch(err => console.error("Failed to click:", err));
+        });
+    }
+
     db.collection(COLLECTION)
         .orderBy('timestamp', 'desc')
         .onSnapshot(snap => {
