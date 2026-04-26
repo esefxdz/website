@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const listEl = document.getElementById('comments-list');
     const titleEl = document.getElementById('comments-title');
     const colorInput = document.getElementById('comment-avatar-color');
+    const b64Input = document.getElementById('comment-avatar-b64');
+    const pfpUpload = document.getElementById('pfp-upload');
+    const pfpPreview = document.getElementById('pfp-preview');
+    const pfpClear = document.getElementById('pfp-clear');
     const warning = document.getElementById('firebase-setup-warning');
 
     if (!form || !listEl) return;
@@ -36,6 +40,49 @@ document.addEventListener('DOMContentLoaded', () => {
             colorInput.value = btn.dataset.color;
         });
     });
+
+    // ── Custom PFP Upload ────────────────────────────────────────
+    if (pfpUpload) {
+        pfpUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    // Shrink to max 64x64 to save space
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = 64;
+                    canvas.height = 64;
+                    
+                    // Center and crop
+                    const size = Math.min(img.width, img.height);
+                    const sx = (img.width - size) / 2;
+                    const sy = (img.height - size) / 2;
+                    
+                    ctx.drawImage(img, sx, sy, size, size, 0, 0, 64, 64);
+                    
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                    b64Input.value = dataUrl;
+                    pfpPreview.style.backgroundImage = `url(${dataUrl})`;
+                    pfpPreview.style.display = 'block';
+                    pfpClear.style.display = 'inline-flex';
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+        
+        pfpClear.addEventListener('click', () => {
+            b64Input.value = '';
+            pfpUpload.value = '';
+            pfpPreview.style.display = 'none';
+            pfpPreview.style.backgroundImage = 'none';
+            pfpClear.style.display = 'none';
+        });
+    }
 
     // ── Char counter ─────────────────────────────────────────────
     charCountEl.textContent = MAX_CHARS;
@@ -88,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = clean(nameInput.value.trim()).slice(0, 32) || 'Anonymous';
         const message = clean(msgInput.value.trim()).slice(0, MAX_CHARS);
         const color = colorInput.value || '#5b6fde';
+        const avatarUrl = b64Input.value;
 
         if (!message) { msgInput.focus(); return; }
 
@@ -96,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             await db.collection(COLLECTION).add({
-                name, message, color,
+                name, message, color, avatarUrl,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
             nameInput.value = '';
@@ -127,11 +175,20 @@ function buildBubble(data) {
 
     const color = data.color || '#64748b';
     const initial = (data.name || '?').charAt(0).toUpperCase();
+    
+    let avatarHtml = '';
+    if (data.avatarUrl) {
+        avatarHtml = `<img src="${esc(data.avatarUrl)}" class="comment-avatar" alt="Avatar">`;
+    } else {
+        avatarHtml = `
+            <div class="comment-avatar" style="background:${esc(color)}">
+                ${esc(initial)}
+            </div>
+        `;
+    }
 
     div.innerHTML = `
-        <div class="comment-avatar" style="background:${esc(color)}">
-            ${esc(initial)}
-        </div>
+        ${avatarHtml}
         <div class="comment-body">
             <div class="comment-header">
                 <span class="comment-name">${esc(data.name)}</span>

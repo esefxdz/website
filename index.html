@@ -48,9 +48,18 @@
         <div class="steam-form-area">
           <p class="steam-form-label">Leave a comment:</p>
 
-          <!-- Avatar colour picker -->
+          <!-- Avatar picker -->
           <div id="avatar-picker">
-            <span class="picker-label">Colour</span>
+            <span class="picker-label">Avatar:</span>
+            
+            <div class="custom-pfp-upload">
+              <label for="pfp-upload" class="pfp-upload-btn">Upload PFP</label>
+              <input type="file" id="pfp-upload" accept="image/png, image/jpeg, image/webp" style="display: none;">
+              <div id="pfp-preview" class="pfp-preview"></div>
+              <button type="button" id="pfp-clear" class="pfp-clear" style="display: none;">&times;</button>
+            </div>
+
+            <span class="picker-label" style="margin-left: 10px;">Or Color:</span>
             <div class="picker-row">
               <button type="button" class="av-opt selected" data-color="#5b6fde" style="background:#5b6fde"></button>
               <button type="button" class="av-opt" data-color="#3b82f6" style="background:#3b82f6"></button>
@@ -65,6 +74,7 @@
 
           <form id="comment-form" autocomplete="off">
             <input type="hidden" id="comment-avatar-color" value="#5b6fde">
+            <input type="hidden" id="comment-avatar-b64" value="">
             <input type="text" id="comment-name" placeholder="Name (optional)" maxlength="32">
             <textarea id="comment-message" placeholder="Write something..." maxlength="300" required></textarea>
             <div class="steam-submit-row">
@@ -87,6 +97,8 @@
       <div id="ahmet-container">
         </div>
     </section>
+
+
 
     <script src="js/gallery.js" defer></script>
     <script src="js/hideBroken.js" defer></script>

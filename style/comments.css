@@ -14,9 +14,11 @@
 
 /* ── Steam panel wrapper ─────────────────────────────────── */
 #comments-section {
-    max-width: 640px;
-    margin: 0 auto 80px;
-    border: 1px solid rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 100%;
+    margin: 50px 0 0 0;
+    padding: 0 20px 40px 20px;
+    box-sizing: border-box;
     background: transparent;
     font-family: 'Motiva Sans', Arial, Helvetica, sans-serif;
 }
@@ -26,9 +28,9 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 14px;
-    background: rgba(0, 0, 0, 0.55);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 10px 0;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .steam-header-title {
@@ -69,15 +71,15 @@
     display: flex;
     gap: 0;
     align-items: flex-start;
-    background: rgba(0, 0, 0, 0.25);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    padding: 10px 14px;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 14px 0;
     transition: background 0.15s;
     animation: fadeRow 0.2s ease forwards;
 }
 
 .comment-bubble:hover {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .comment-bubble:last-child {
@@ -160,9 +162,10 @@
 
 /* ── Post form (bottom, Steam style) ────────────────────── */
 .steam-form-area {
-    background: rgba(0, 0, 0, 0.4);
-    border-top: 1px solid rgba(0, 0, 0, 0.5);
-    padding: 12px 14px;
+    background: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0 0 0;
+    margin-top: 10px;
 }
 
 .steam-form-label {
@@ -222,17 +225,17 @@
 #comment-form input[type="text"],
 #comment-form textarea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.35);
-    border: 1px solid #3d4b57;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 2px;
     color: #c6d4df;
-    padding: 7px 10px;
-    font-size: 0.82rem;
+    padding: 10px;
+    font-size: 0.85rem;
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
     resize: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background 0.2s;
 }
 
 #comment-form input[type="text"]::placeholder,
@@ -289,4 +292,56 @@
     font-size: 0.72rem;
     color: #556772;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ── Custom PFP Upload ───────────────────────────────────── */
+.custom-pfp-upload {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pfp-upload-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #c6d4df;
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+}
+
+.pfp-upload-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.pfp-preview {
+    width: 24px;
+    height: 24px;
+    border-radius: 2px;
+    background-size: cover;
+    background-position: center;
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.pfp-clear {
+    background: transparent;
+    border: none;
+    color: #e05555;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s;
+}
+
+.pfp-clear:hover {
+    color: #ff7070;
 }
