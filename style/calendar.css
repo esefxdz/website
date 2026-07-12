@@ -116,3 +116,5 @@
     text-align: center; color: rgba(255,255,255,0.2); padding: 30px 0;
     font-family: Arial, sans-serif; font-size: 0.8rem;
 }
+
+.cal-tz-note { font-size: 0.65rem; color: rgba(255,255,255,0.18); text-align: center; margin-top: 16px; }
