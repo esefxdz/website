@@ -8,13 +8,13 @@
 
 /* ── Two-column layout ─────────────────────────────────────── */
 .cal-wrap {
-    max-width: 1200px; margin: 0 auto;
-    padding: 120px 40px 60px;
-    display: flex; gap: 28px;
+    max-width: 95vw; margin: 0 auto;
+    padding: 110px 24px 40px;
+    display: flex; gap: 20px;
     color: #fff;
 }
 .cal-main { flex: 1; min-width: 0; }
-.cal-sidebar { width: 280px; flex-shrink: 0; }
+.cal-sidebar { width: 300px; flex-shrink: 0; background: rgba(15,15,35,0.35); border: 1px solid rgba(91,111,222,0.12); border-radius: 12px; padding: 18px; }
 
 /* ── Month nav ─────────────────────────────────────────────── */
 .cal-nav {
@@ -36,7 +36,7 @@
 .cal-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 3px;
+    gap: 4px;
 }
 .cal-day-header {
     text-align: center; font-size: 0.7rem; text-transform: uppercase;
@@ -45,7 +45,7 @@
 }
 .cal-day {
     background: rgba(15,15,35,0.5); border: 1px solid rgba(91,111,222,0.12);
-    border-radius: 6px; min-height: 70px; padding: 4px 6px;
+    border-radius: 6px; min-height: 85px; padding: 4px 6px;
     position: relative; transition: border-color 0.2s;
 }
 .cal-day.today { border-color: rgba(91,111,222,0.45); }
@@ -93,7 +93,7 @@
 }
 
 /* ── Sidebar ───────────────────────────────────────────────── */
-.cal-sidebar h3 {
+.cal-sidebar h3 { margin-top: 0;
     font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
     color: rgba(255,255,255,0.4); margin: 0 0 14px;
     font-family: Arial, sans-serif;
