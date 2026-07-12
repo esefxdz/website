@@ -60,9 +60,9 @@
     font-size: 0.75rem; color: rgba(255,255,255,0.75); margin-bottom: 2px;
 }
 .cal-day .day-dot {
-    display: inline-block; width: 6px; height: 6px;
+    display: inline-block; width: 9px; height: 9px;
     border-radius: 50%; background: #c4b5fd;
-    margin: 1px 2px 0 0; vertical-align: middle;
+    margin: 2px 2px 0 0; vertical-align: middle;
 }
 
 /* ── Hover popup ───────────────────────────────────────────── */
