@@ -5,3 +5,5 @@ __pycache__/
 Thumbs.db
 *.log
 .DS_Store
+firebase.txt
+manipulate_boxes.md

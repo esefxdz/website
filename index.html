@@ -111,53 +111,54 @@
 
     <section id="yuukabot" class="tab-content">
       <header class="dash-header">
-        <h1>Yuuka Bot</h1>
-        <p>Live dashboard — stats, music, gacha, and more.</p>
+        <h1><span class="status-dot" id="dash-status-dot"></span>Yuuka Bot</h1>
       </header>
 
       <div class="dash-grid">
-        <!-- Card 1: Now Playing -->
+        <!-- Uptime -->
         <div class="dash-card">
-          <div class="card-icon">🎵</div>
-          <div class="card-body">
-            <h3>Now Playing</h3>
-            <p class="card-value" id="dash-nowplaying">—</p>
-            <span class="card-label">across all servers</span>
+          <div class="card-top">
+            <div class="card-icon">⏱️</div>
+            <span class="card-label">System Uptime</span>
           </div>
+          <p class="card-value" id="dash-uptime">—</p>
+          <span class="card-detail">since last boot</span>
         </div>
 
-        <!-- Card 2: Gacha pulls -->
+        <!-- CPU -->
         <div class="dash-card">
-          <div class="card-icon">🎫</div>
-          <div class="card-body">
-            <h3>Total Pulls</h3>
-            <p class="card-value" id="dash-pulls">—</p>
-            <span class="card-label">recruitments since launch</span>
+          <div class="card-top">
+            <div class="card-icon">⚡</div>
+            <span class="card-label">CPU</span>
           </div>
+          <p class="card-value" id="dash-cpu-val">—</p>
+          <div class="card-bar-wrap"><div class="card-bar-fill cpu" id="dash-cpu-bar" style="width:0%"></div></div>
         </div>
 
-        <!-- Card 3: Radio listeners -->
+        <!-- RAM -->
         <div class="dash-card">
-          <div class="card-icon">📻</div>
-          <div class="card-body">
-            <h3>Radio Listeners</h3>
-            <p class="card-value" id="dash-radio">—</p>
-            <span class="card-label">servers tuned in right now</span>
+          <div class="card-top">
+            <div class="card-icon">💾</div>
+            <span class="card-label">Memory</span>
           </div>
+          <p class="card-value" id="dash-ram-val">—</p>
+          <div class="card-bar-wrap"><div class="card-bar-fill ram" id="dash-ram-bar" style="width:0%"></div></div>
+          <span class="card-detail" id="dash-ram-detail"></span>
         </div>
 
-        <!-- Card 4: Uptime -->
+        <!-- Disk -->
         <div class="dash-card">
-          <div class="card-icon">⏱️</div>
-          <div class="card-body">
-            <h3>Uptime</h3>
-            <p class="card-value" id="dash-uptime">—</p>
-            <span class="card-label" id="dash-uptime-label">since last restart</span>
+          <div class="card-top">
+            <div class="card-icon">💿</div>
+            <span class="card-label">Disk</span>
           </div>
+          <p class="card-value" id="dash-disk-val">—</p>
+          <div class="card-bar-wrap"><div class="card-bar-fill disk" id="dash-disk-bar" style="width:0%"></div></div>
+          <span class="card-detail" id="dash-disk-detail"></span>
         </div>
       </div>
 
-      <p class="dash-footer">Live data from <code>esef-514bf</code> · updates every 60s</p>
+      <p class="dash-footer">synced every 10s</p>
     </section>
 
     <script src="js/gallery.js" defer></script>
@@ -167,6 +168,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
     <script src="js/comments.js"></script>
+    <script src="js/yuukabot.js"></script>
 
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox">
