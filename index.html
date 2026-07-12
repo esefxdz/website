@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="style/gallery.css">
     <link rel="stylesheet" href="style/ahmet.css">
     <link rel="stylesheet" href="style/comments.css">
+    <link rel="stylesheet" href="style/yuukabot.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>Esef</title>
   </head>
@@ -17,6 +18,7 @@
       <button id="about-btn">About This Website</button>
       <button id="gallery-btn">Gallery</button>
       <button id="ahmet-btn">Ahmet Museum</button>
+      <button id="yuukabot-btn">Yuuka Bot</button>
     </div>
 
     <section id="about" class="tab-content">
@@ -107,9 +109,59 @@
         </div>
     </section>
 
+    <section id="yuukabot" class="tab-content">
+      <header class="dash-header">
+        <h1>Yuuka Bot</h1>
+        <p>Live dashboard — stats, music, gacha, and more.</p>
+      </header>
 
+      <div class="dash-grid">
+        <!-- Card 1: Now Playing -->
+        <div class="dash-card">
+          <div class="card-icon">🎵</div>
+          <div class="card-body">
+            <h3>Now Playing</h3>
+            <p class="card-value" id="dash-nowplaying">—</p>
+            <span class="card-label">across all servers</span>
+          </div>
+        </div>
 
-    <script src="js/gallery.js" defer></script>    <script src="js/tabs.js" defer></script>
+        <!-- Card 2: Gacha pulls -->
+        <div class="dash-card">
+          <div class="card-icon">🎫</div>
+          <div class="card-body">
+            <h3>Total Pulls</h3>
+            <p class="card-value" id="dash-pulls">—</p>
+            <span class="card-label">recruitments since launch</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Radio listeners -->
+        <div class="dash-card">
+          <div class="card-icon">📻</div>
+          <div class="card-body">
+            <h3>Radio Listeners</h3>
+            <p class="card-value" id="dash-radio">—</p>
+            <span class="card-label">servers tuned in right now</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Uptime -->
+        <div class="dash-card">
+          <div class="card-icon">⏱️</div>
+          <div class="card-body">
+            <h3>Uptime</h3>
+            <p class="card-value" id="dash-uptime">—</p>
+            <span class="card-label" id="dash-uptime-label">since last restart</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="dash-footer">Live data from <code>esef-514bf</code> · updates every 60s</p>
+    </section>
+
+    <script src="js/gallery.js" defer></script>
+    <script src="js/tabs.js" defer></script>
 
     <!-- Firebase SDK (loaded before comments.js) -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
