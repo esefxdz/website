@@ -29,10 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 1; i <= totalImages; i++) {
       const img = document.createElement('img');
       img.alt = `${folderName} Image ${i}`;
-      
+
       // Load the thumbnail instead of the full image
       img.src = `${folderName}/thumbnails/${i}.jpg`;
-      
+
       // If thumbnail fails to load, it means the image doesn't exist at all
       img.onerror = () => { img.style.display = 'none'; };
 
@@ -40,22 +40,22 @@ document.addEventListener('DOMContentLoaded', () => {
       img.onclick = () => {
         lightbox.style.display = "block";
         lightboxImg.src = ""; // Clear previous image
-        
+
         // Try loading original full quality image: jpg -> png -> gif
         const tryLoad = (extensions) => {
-            if (extensions.length === 0) return; // All failed
-            const testExt = extensions.shift();
-            
-            const tempImg = new Image();
-            tempImg.onload = () => {
-                lightboxImg.src = tempImg.src; // Success! Show it.
-            };
-            tempImg.onerror = () => {
-                tryLoad(extensions); // Failed, try next extension
-            };
-            tempImg.src = `${folderName}/${i}.${testExt}`;
+          if (extensions.length === 0) return; // All failed
+          const testExt = extensions.shift();
+
+          const tempImg = new Image();
+          tempImg.onload = () => {
+            lightboxImg.src = tempImg.src; // Success! Show it.
+          };
+          tempImg.onerror = () => {
+            tryLoad(extensions); // Failed, try next extension
+          };
+          tempImg.src = `${folderName}/${i}.${testExt}`;
         };
-        
+
         // Start trying to find the full image
         tryLoad(['jpg', 'png', 'gif']);
       };
@@ -68,5 +68,5 @@ document.addEventListener('DOMContentLoaded', () => {
   loadGallery('gallery-container', 'gallery', 50);
 
   // Load your new Ahmet Museum (adjust the number 20 to however many photos you have)
-  loadGallery('ahmet-container', 'ahmet', 20); 
+  loadGallery('ahmet-container', 'ahmet', 20);
 });

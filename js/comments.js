@@ -103,6 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Firebase is configured — hide the setup warning
+    if (warning) warning.style.display = 'none';
+
     // ── Firebase init ────────────────────────────────────────────
     firebase.initializeApp(FIREBASE_CONFIG);
     const db = firebase.firestore();
