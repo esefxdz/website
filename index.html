@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style/ahmet.css">
     <link rel="stylesheet" href="style/comments.css">
     <link rel="stylesheet" href="style/yuukabot.css">
+    <link rel="stylesheet" href="style/calendar.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>Esef</title>
   </head>
@@ -19,6 +20,7 @@
       <button id="gallery-btn">Gallery</button>
       <button id="ahmet-btn">Ahmet Museum</button>
       <button id="yuukabot-btn">Yuuka Bot</button>
+      <button id="calendar-btn">Calendar</button>
     </div>
 
     <section id="about" class="tab-content">
@@ -171,6 +173,23 @@
       </div>
     </section>
 
+    <section id="calendar" class="tab-content">
+      <div class="cal-wrap">
+        <div class="cal-main">
+          <div class="cal-nav">
+            <button id="cal-prev">&lt;</button>
+            <h2 id="cal-nav-title">Loading...</h2>
+            <button id="cal-next">&gt;</button>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+        </div>
+        <div class="cal-sidebar">
+          <h3>Upcoming</h3>
+          <div id="cal-sidebar-list"><p class="cal-side-empty">Loading...</p></div>
+        </div>
+      </div>
+    </section>
+
     <script src="js/gallery.js" defer></script>
     <script src="js/tabs.js" defer></script>
 
@@ -179,6 +198,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
     <script src="js/comments.js"></script>
     <script src="js/yuukabot.js"></script>
+    <script src="js/calendar.js"></script>
 
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox">
