@@ -1,4 +1,4 @@
-// Calendar tab — country-timezone-aware, auto-converts to your local time
+// Calendar tab — timezone-aware (auto-converts to your local time)
 const CAL_FB_CONFIG = {
     apiKey: "AIzaSyDuSjEGEKx5FnWYnQq8f_owbpYRBRrl5x0",
     authDomain: "esef-514bf.firebaseapp.com",
@@ -12,18 +12,16 @@ const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS = ["January","February","March","April","May","June",
                 "July","August","September","October","November","December"];
 
-function fmtTime(utcIso, time, country) {
+function fmtTime(utcIso) {
     if (utcIso) {
         try {
             var d = new Date(utcIso);
             if (!isNaN(d.getTime())) {
-                var local = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-                if (country) local += " (" + country + ")";
-                return local;
+                return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
             }
         } catch (e) {}
     }
-    return (time || "") + (country ? " (" + country + ")" : "");
+    return "";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -49,10 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: d.title || "",
                 date: d.date || "",
                 time: d.time || "",
-                country: d.country || "",
                 utc: d.utc || "",
                 description: d.description || "",
-                createdBy: d.createdBy || "",
                 _sort: d.utc || (d.date + "T" + (d.time || "00:00"))
             });
         });
@@ -109,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 dayEvents.forEach(e => {
                     html += '<div class="cal-popup-item">';
                     if (e.time) {
-                        html += '<span class="pop-time">' + fmtTime(e.utc, e.time, e.country) + "</span> ";
+                        html += '<span class="pop-time">' + fmtTime(e.utc) + "</span> ";
                     }
                     html += esc(e.title);
                     if (e.description) html += '<div class="pop-desc">' + esc(e.description) + "</div>";
@@ -124,12 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const upcoming = allEvents.filter(e => e.date >= todayStr);
         if (upcoming.length === 0) {
-            sidebarEl.innerHTML = '<p class="cal-side-empty">No upcoming events.<br>Use /book in Discord.</p>';
+            sidebarEl.innerHTML = '<p class="cal-side-empty">No upcoming events.<br>Use !book in Discord.</p>';
         } else {
             sidebarEl.innerHTML = upcoming.slice(0, 15).map(e =>
                 '<div class="cal-side-event">' +
                 '<div class="se-date">' + e.date +
-                (e.time ? " " + fmtTime(e.utc, e.time, e.country) : "") + "</div>" +
+                (e.time ? " " + fmtTime(e.utc) : "") + "</div>" +
                 '<div class="se-title">' + esc(e.title) + "</div>" +
                 (e.description ? '<div class="se-desc">' + esc(e.description) + "</div>" : "") +
                 "</div>"
