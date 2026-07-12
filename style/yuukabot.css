@@ -4,16 +4,16 @@
 
 /* ── LAYOUT: edit these to change the grid ────────────────── */
 :root {
-    --dash-columns: 2;            /* number of columns (2 = 2×2, 3 = 3-wide, etc.) */
-    --dash-gap: 24px;             /* space between boxes */
-    --dash-min-card-height: 220px;/* minimum height of each box */
-    --dash-max-width: 1100px;     /* max width of the whole grid */
-    --dash-padding: 120px 40px 60px; /* top right/left bottom */
+    --dash-columns: 6;            /* number of columns (2 = 2×2, 3 = 3-wide, etc.) */
+    --dash-gap: 20px;             /* space between boxes */
+    --dash-min-card-height: 200px;/* minimum height of each box */
+    --dash-max-width: none;     /* max width of the whole grid */
+    --dash-padding: 120px 48px 60px; /* top right/left bottom */
 }
 
 /* To make boxes take different amounts of space, add a class
    to the HTML like "wide" or "tall" and define it here:
-   .dash-card.wide { grid-column: span 2; }
+   
    .dash-card.tall { grid-row: span 2; }                     */
 
 /* ── Tab header ───────────────────────────────────────────── */
@@ -49,7 +49,7 @@
     gap: var(--dash-gap);
     max-width: var(--dash-max-width);
     margin: 0 auto;
-    padding: 0 40px 60px;
+    padding: 0 48px 60px;
 }
 
 /* ── Glass card ───────────────────────────────────────────── */
@@ -123,6 +123,7 @@
 .card-bar-fill.cpu  { background: linear-gradient(90deg, #5b6fde, #818cf8); }
 .card-bar-fill.ram  { background: linear-gradient(90deg, #a78bfa, #c4b5fd); }
 .card-bar-fill.disk { background: linear-gradient(90deg, #34d399, #6ee7b7); }
+.card-bar-fill.swap { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
 
 /* ── Detail text (used / total) ───────────────────────────── */
 .card-detail {
@@ -140,3 +141,22 @@
     padding-bottom: 50px;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ── Wide card (span 2 columns) ────────────────────────────── */
+
+
+/* ── Fastfetch text block ──────────────────────────────────── */
+.card-fetch {
+    margin: 12px 0 0;
+    font-family: "Cascadia Code", "Fira Code", "JetBrains Mono", Consolas, monospace;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: pre-wrap;
+    line-height: 1.6;
+    overflow: hidden;
+}
+
+/* ── Span helpers (6-col grid) ──────────────────────────────── */
+.dash-card.span2 { grid-column: span 2; }  /* 3 per row */
+.dash-card.span3 { grid-column: span 3; }  /* 2 per row — stretched */
+.dash-card.span6 { grid-column: span 6; }  /* full width */

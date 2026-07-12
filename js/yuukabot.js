@@ -1,7 +1,4 @@
-// ═══════════════════════════════════════════════════════════
-// YUUKA BOT DASHBOARD — live Firestore reader
-// ═══════════════════════════════════════════════════════════
-
+// Yuuka Bot Dashboard — live Firestore reader
 const YUUKA_FIREBASE_CONFIG = {
     apiKey: "AIzaSyDuSjEGEKx5FnWYnQq8f_owbpYRBRrl5x0",
     authDomain: "esef-514bf.firebaseapp.com",
@@ -15,54 +12,62 @@ document.addEventListener("DOMContentLoaded", () => {
     const dash = document.getElementById("yuukabot");
     if (!dash) return;
 
-    // Init Firebase (skip if already done by comments.js)
-    if (!firebase.apps.length) {
-        firebase.initializeApp(YUUKA_FIREBASE_CONFIG);
-    }
+    if (!firebase.apps.length) firebase.initializeApp(YUUKA_FIREBASE_CONFIG);
     const db = firebase.firestore();
 
-    // Live listener: updates the dashboard whenever Firestore changes
     db.collection("sysinfo").doc("server").onSnapshot(
         (doc) => {
             if (!doc.exists) return;
             const d = doc.data();
 
-            // Online status
+            // Online dot
             const dot = document.getElementById("dash-status-dot");
-            if (dot) {
-                dot.className = d.online ? "status-dot" : "status-dot offline";
-            }
+            if (dot) dot.className = d.online ? "status-dot" : "status-dot offline";
 
             // Uptime
-            const uptimeEl = document.getElementById("dash-uptime");
-            if (uptimeEl && d.uptime) uptimeEl.textContent = d.uptime;
+            setText("dash-uptime", d.uptime);
 
-            // CPU
-            setBar("dash-cpu-val", "dash-cpu-bar", "dash-cpu-detail", d.cpu, "%", "cpu");
-
-            // RAM
-            const ramEl = document.getElementById("dash-ram-detail");
-            if (ramEl && d.ramUsed && d.ramTotal) {
-                ramEl.textContent = d.ramUsed + " / " + d.ramTotal;
-            }
+            // CPU, RAM, Disk, Swap — bars
+            setBar("dash-cpu-val", "dash-cpu-bar", null, d.cpu, "%", "cpu");
             setBar("dash-ram-val", "dash-ram-bar", null, d.ram, "%", "ram");
-
-            // Disk
-            const diskEl = document.getElementById("dash-disk-detail");
-            if (diskEl && d.diskUsed && d.diskTotal) {
-                diskEl.textContent = d.diskUsed + " / " + d.diskTotal;
-            }
+            setText("dash-ram-detail", d.ramUsed ? d.ramUsed + " / " + d.ramTotal : "");
             setBar("dash-disk-val", "dash-disk-bar", null, d.disk, "%", "disk");
+            setText("dash-disk-detail", d.diskUsed ? d.diskUsed + " / " + d.diskTotal : "");
+            setBar("dash-swap-val", "dash-swap-bar", null, d.swap, "%", "swap");
+            setText("dash-swap-detail", d.swapUsed ? d.swapUsed + " / " + d.swapTotal : "");
+
+            // Load average
+            if (d.load1 != null) {
+                setText("dash-load", d.load1 + " / " + d.load5 + " / " + d.load15);
+            }
+
+            // Network
+            if (d.netSent) {
+                setText("dash-net", "sent " + d.netSent);
+                setText("dash-net-detail", "recv " + (d.netRecv || "—"));
+            }
+
+            // Processes
+            // Fastfetch
+            setText("dash-fetch", d.fetch);
+
+            if (d.processes != null) {
+                setText("dash-procs", d.processes.toLocaleString());
+            }
         },
-        (err) => {
-            // Firestore unreachable — show offline
+        () => {
             const dot = document.getElementById("dash-status-dot");
             if (dot) dot.className = "status-dot offline";
         }
     );
 });
 
-function setBar(valId, barId, detailId, value, suffix, barClass) {
+function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el && value != null) el.textContent = value;
+}
+
+function setBar(valId, barId, _detailId, value, suffix, barClass) {
     const valEl = document.getElementById(valId);
     const barEl = document.getElementById(barId);
     if (valEl && value != null) {
