@@ -14,7 +14,7 @@
     color: #fff;
 }
 .cal-main { flex: 1; min-width: 0; }
-.cal-sidebar { width: 300px; flex-shrink: 0; background: rgba(15,15,35,0.35); border: 1px solid rgba(91,111,222,0.12); border-radius: 12px; padding: 18px; }
+.cal-sidebar { width: 300px; flex-shrink: 0; background: rgba(12,12,30,0.7); border: 1px solid rgba(91,111,222,0.25); border-radius: 12px; padding: 18px; }
 
 /* ── Month nav ─────────────────────────────────────────────── */
 .cal-nav {
@@ -23,7 +23,7 @@
 }
 .cal-nav h2 {
     font-size: 1.4rem; margin: 0; min-width: 200px; text-align: center;
-    color: rgba(255,255,255,0.9);
+    color: #fff;
 }
 .cal-nav button {
     background: rgba(91,111,222,0.2); border: 1px solid rgba(91,111,222,0.3);
@@ -40,11 +40,11 @@
 }
 .cal-day-header {
     text-align: center; font-size: 0.7rem; text-transform: uppercase;
-    color: rgba(255,255,255,0.35); padding: 6px 0;
+    color: rgba(255,255,255,0.6); padding: 6px 0;
     font-family: Arial, sans-serif; letter-spacing: 1px;
 }
 .cal-day {
-    background: rgba(15,15,35,0.5); border: 1px solid rgba(91,111,222,0.12);
+    background: rgba(12,12,30,0.8); border: 1px solid rgba(91,111,222,0.12);
     border-radius: 6px; min-height: 85px; padding: 4px 6px;
     position: relative; transition: border-color 0.2s;
 }
@@ -57,11 +57,11 @@
     z-index: 2;
 }
 .cal-day .day-num {
-    font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-bottom: 2px;
+    font-size: 0.75rem; color: rgba(255,255,255,0.75); margin-bottom: 2px;
 }
 .cal-day .day-dot {
     display: inline-block; width: 6px; height: 6px;
-    border-radius: 50%; background: #a5b4fc;
+    border-radius: 50%; background: #c4b5fd;
     margin: 1px 2px 0 0; vertical-align: middle;
 }
 
@@ -69,8 +69,8 @@
 .cal-popup {
     display: none; position: absolute;
     top: 100%; left: 50%; transform: translateX(-50%);
-    background: rgba(20,20,45,0.95); backdrop-filter: blur(12px);
-    border: 1px solid rgba(91,111,222,0.4); border-radius: 10px;
+    background: rgba(12,12,30,0.97); backdrop-filter: blur(12px);
+    border: 1px solid rgba(91,111,222,0.5); border-radius: 10px;
     padding: 14px 16px; min-width: 200px; max-width: 280px;
     z-index: 10; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
     pointer-events: none;
@@ -82,39 +82,39 @@
 }
 .cal-popup-item {
     padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
-    font-size: 0.82rem; color: rgba(255,255,255,0.85);
+    font-size: 0.82rem; color: #fff;
 }
 .cal-popup-item:last-child { border-bottom: none; }
 .cal-popup-item .pop-time {
     font-weight: bold; color: #c4b5fd; margin-right: 6px;
 }
 .cal-popup-item .pop-desc {
-    font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 2px;
+    font-size: 0.7rem; color: rgba(255,255,255,0.55); margin-top: 2px;
 }
 
 /* ── Sidebar ───────────────────────────────────────────────── */
 .cal-sidebar h3 { margin-top: 0;
     font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
-    color: rgba(255,255,255,0.4); margin: 0 0 14px;
+    color: rgba(255,255,255,0.65); margin: 0 0 14px;
     font-family: Arial, sans-serif;
 }
 .cal-side-event {
-    padding: 10px 12px; background: rgba(15,15,35,0.4);
+    padding: 10px 12px; background: rgba(12,12,30,0.75);
     border: 1px solid rgba(91,111,222,0.1); border-radius: 8px;
     margin-bottom: 6px; font-size: 0.82rem;
 }
 .cal-side-event .se-date {
-    color: rgba(255,255,255,0.35); font-size: 0.7rem; margin-bottom: 2px;
+    color: rgba(255,255,255,0.6); font-size: 0.7rem; margin-bottom: 2px;
 }
 .cal-side-event .se-title {
     color: #fff; font-weight: 500;
 }
 .cal-side-event .se-desc {
-    color: rgba(255,255,255,0.35); font-size: 0.7rem; margin-top: 2px;
+    color: rgba(255,255,255,0.55); font-size: 0.7rem; margin-top: 2px;
 }
 .cal-side-empty {
-    text-align: center; color: rgba(255,255,255,0.2); padding: 30px 0;
+    text-align: center; color: rgba(255,255,255,0.4); padding: 30px 0;
     font-family: Arial, sans-serif; font-size: 0.8rem;
 }
 
-.cal-tz-note { font-size: 0.65rem; color: rgba(255,255,255,0.18); text-align: center; margin-top: 16px; }
+.cal-tz-note { font-size: 0.65rem; color: rgba(255,255,255,0.35); text-align: center; margin-top: 16px; }
