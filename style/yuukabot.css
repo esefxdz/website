@@ -160,3 +160,4 @@
 .dash-card.span2 { grid-column: span 2; }  /* 3 per row */
 .dash-card.span3 { grid-column: span 3; }  /* 2 per row — stretched */
 .dash-card.span6 { grid-column: span 6; }  /* full width */
+.card-spacer { height: 32px; }
