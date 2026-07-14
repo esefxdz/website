@@ -61,6 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("cal-prev").onclick = () => { viewDate.setMonth(viewDate.getMonth()-1); render(); };
     document.getElementById("cal-next").onclick = () => { viewDate.setMonth(viewDate.getMonth()+1); render(); };
 
+    // Auto-refresh every 60s so "Upcoming" stays current as time passes
+    setInterval(render, 60000);
+
     function render() {
         const year = viewDate.getFullYear();
         const month = viewDate.getMonth();
