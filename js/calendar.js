@@ -121,7 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         gridEl.innerHTML = html;
 
-        const upcoming = allEvents.filter(e => e.date >= todayStr);
+        const nowISO = new Date().toISOString();
+        const upcoming = allEvents.filter(e => e._sort >= nowISO);
         if (upcoming.length === 0) {
             sidebarEl.innerHTML = '<p class="cal-side-empty">No upcoming events.<br>Use !book in Discord.</p>';
         } else {
