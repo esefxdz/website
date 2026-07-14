@@ -1,214 +1,229 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="style/gallery.css">
-    <link rel="stylesheet" href="style/ahmet.css">
-    <link rel="stylesheet" href="style/comments.css">
-    <link rel="stylesheet" href="style/yuukabot.css">
-    <link rel="stylesheet" href="style/calendar.css">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>Esef</title>
-  </head>
-  <body>
-    <video autoplay muted loop id="background-video">
-      <source src="textures/Yuuka_body.mp4" type="video/mp4">
-    </video>
-    <video muted loop playsinline preload="none" id="calendar-background-video" style="display:none">
-      <source src="textures/calendar_background.mp4" type="video/mp4">
-    </video>
-    <div id="top-line">
-      <a href="index.html" id="home-btn"></a>
-      <button id="about-btn">About This Website</button>
-      <button id="gallery-btn">Gallery</button>
-      <button id="ahmet-btn">Ahmet Museum</button>
-      <button id="yuukabot-btn">Yuuka Bot</button>
-      <button id="calendar-btn">Calendar</button>
+
+<head>
+  <link rel="stylesheet" href="style/styles.css">
+  <link rel="stylesheet" href="style/gallery.css">
+  <link rel="stylesheet" href="style/ahmet.css">
+  <link rel="stylesheet" href="style/comments.css">
+  <link rel="stylesheet" href="style/yuukabot.css">
+  <link rel="stylesheet" href="style/calendar.css">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <title>Esef</title>
+</head>
+
+<body>
+  <video autoplay muted loop id="background-video">
+    <source src="textures/Yuuka_body.mp4" type="video/mp4">
+  </video>
+  <video muted loop playsinline preload="none" id="calendar-background-video" style="display:none">
+    <source src="textures/calendar_background.mp4" type="video/mp4">
+  </video>
+  <div id="top-line">
+    <a href="index.html" id="home-btn"></a>
+    <button id="about-btn">About This Website</button>
+    <button id="gallery-btn">Gallery</button>
+    <button id="ahmet-btn">Ahmet Museum</button>
+    <button id="yuukabot-btn">Bot Status</button>
+    <button id="calendar-btn">Calendar</button>
+  </div>
+
+  <section id="about" class="tab-content">
+
+    <!-- Top half: welcome -->
+    <div id="about-hero">
+      <div id="click-counter-container">
+        <img src="textures/yuuka_click.png" id="yuuka-click-btn" alt="Click Me!">
+        <div id="click-counter-display">...</div>
+        <div id="click-counter-label">click me</div>
+      </div>
+      <div class="hero-text">
+        <h1>Hello!!!!</h1>
+        <p>Welcome to my first website, I don't actually use here at all but if you are here you should leave a
+          comment!!</p>
+      </div>
     </div>
 
-    <section id="about" class="tab-content">
+    <!-- Bottom half: Steam-style comments -->
+    <div id="comments-section">
 
-      <!-- Top half: welcome -->
-      <div id="about-hero">
-        <div id="click-counter-container">
-          <img src="textures/yuuka_click.png" id="yuuka-click-btn" alt="Click Me!">
-          <div id="click-counter-display">...</div>
-          <div id="click-counter-label">click me</div>
-        </div>
-        <div class="hero-text">
-          <h1>Hello!!!!</h1>
-          <p>Welcome to my first website, I don't actually use here at all but if you are here you should leave a comment!!</p>
-        </div>
+      <!-- Steam panel header -->
+      <div class="steam-header">
+        <span class="steam-header-title">COMMENTS</span>
+        <span id="comments-title"></span>
       </div>
 
-      <!-- Bottom half: Steam-style comments -->
-      <div id="comments-section">
+      <div id="firebase-setup-warning">
+        ⚠️ <strong>Setup needed:</strong> Open <code>js/comments.js</code> and follow the setup instructions at the top
+        of the file.
+      </div>
 
-        <!-- Steam panel header -->
-        <div class="steam-header">
-          <span class="steam-header-title">COMMENTS</span>
-          <span id="comments-title"></span>
-        </div>
+      <!-- Post form — at the top -->
+      <div class="steam-form-area" style="margin-bottom: 20px; border-top: none; padding-top: 0; margin-top: 20px;">
+        <p class="steam-form-label">Leave a comment:</p>
 
-        <div id="firebase-setup-warning">
-          ⚠️ <strong>Setup needed:</strong> Open <code>js/comments.js</code> and follow the setup instructions at the top of the file.
-        </div>
+        <!-- Avatar picker -->
+        <div id="avatar-picker">
+          <span class="picker-label">Avatar:</span>
 
-        <!-- Post form — at the top -->
-        <div class="steam-form-area" style="margin-bottom: 20px; border-top: none; padding-top: 0; margin-top: 20px;">
-          <p class="steam-form-label">Leave a comment:</p>
-
-          <!-- Avatar picker -->
-          <div id="avatar-picker">
-            <span class="picker-label">Avatar:</span>
-            
-            <div class="custom-pfp-upload">
-              <label for="pfp-upload" class="pfp-upload-btn">Upload PFP</label>
-              <input type="file" id="pfp-upload" accept="image/png, image/jpeg, image/webp" style="display: none;">
-              <div id="pfp-preview" class="pfp-preview"></div>
-              <button type="button" id="pfp-clear" class="pfp-clear" style="display: none;">&times;</button>
-            </div>
-
-            <span class="picker-label" style="margin-left: 10px;">Or Color:</span>
-            <div class="picker-row">
-              <button type="button" class="av-opt selected" data-color="#5b6fde" style="background:#5b6fde"></button>
-              <button type="button" class="av-opt" data-color="#3b82f6" style="background:#3b82f6"></button>
-              <button type="button" class="av-opt" data-color="#10b981" style="background:#10b981"></button>
-              <button type="button" class="av-opt" data-color="#f59e0b" style="background:#f59e0b"></button>
-              <button type="button" class="av-opt" data-color="#ef4444" style="background:#ef4444"></button>
-              <button type="button" class="av-opt" data-color="#8b5cf6" style="background:#8b5cf6"></button>
-              <button type="button" class="av-opt" data-color="#ec4899" style="background:#ec4899"></button>
-              <button type="button" class="av-opt" data-color="#64748b" style="background:#64748b"></button>
-            </div>
+          <div class="custom-pfp-upload">
+            <label for="pfp-upload" class="pfp-upload-btn">Upload PFP</label>
+            <input type="file" id="pfp-upload" accept="image/png, image/jpeg, image/webp" style="display: none;">
+            <div id="pfp-preview" class="pfp-preview"></div>
+            <button type="button" id="pfp-clear" class="pfp-clear" style="display: none;">&times;</button>
           </div>
 
-          <form id="comment-form" autocomplete="off">
-            <input type="hidden" id="comment-avatar-color" value="#5b6fde">
-            <input type="hidden" id="comment-avatar-b64" value="">
-            <input type="text" id="comment-name" placeholder="Name (optional)" maxlength="32">
-            <textarea id="comment-message" placeholder="Write something..." maxlength="300" required></textarea>
-            <div class="steam-submit-row">
-              <span id="char-count">300</span>
-              <button type="submit" id="comment-submit">Post Comment</button>
-            </div>
-          </form>
-        </div>
-
-        <!-- Comments feed -->
-        <div id="comments-list"></div>
-
-        <!-- Pagination -->
-        <div id="comments-pagination" class="steam-pagination"></div>
-
-      </div>
-    </section>
-
-    <section id="gallery" class="tab-content">
-      <div class="gallery-grid">
-      </div>
-      <div id="gallery-container" class="gallery-grid"></div>
-    </section>
-
-    <section id="ahmet" class="tab-content">
-      <div id="ahmet-container">
-        </div>
-    </section>
-
-    <section id="yuukabot" class="tab-content">
-      <header class="dash-header">
-        <h1><span class="status-dot" id="dash-status-dot"></span>Yuuka Bot</h1>
-      </header>
-
-      <div class="dash-grid">
-        <!-- Row 1: 3 boxes -->
-        <div class="dash-card span2">
-          <div class="card-top"><span class="card-label">Uptime</span></div>
-          <p class="card-value" id="dash-uptime">—</p>
-          <div class="card-spacer"></div>
-        </div>
-        <div class="dash-card span2">
-          <div class="card-top"><span class="card-label">Disk</span></div>
-          <p class="card-value" id="dash-disk-val">—</p>
-          <div class="card-bar-wrap"><div class="card-bar-fill disk" id="dash-disk-bar" style="width:0%"></div></div>
-          <span class="card-detail" id="dash-disk-detail"></span>
-        </div>
-        <div class="dash-card span2">
-          <div class="card-top"><span class="card-label">Load Average</span></div>
-          <p class="card-value" id="dash-load">—</p>
-          <span class="card-detail">1m / 5m / 15m</span>
-        </div>
-
-        <!-- Row 2: 3 boxes -->
-        <div class="dash-card span2">
-          <div class="card-top"><span class="card-label">Network</span></div>
-          <p class="card-value" id="dash-net">—</p>
-          <span class="card-detail" id="dash-net-detail"></span>
-        </div>
-        <div class="dash-card span2">
-          <div class="card-top"><span class="card-label">Processes</span></div>
-          <p class="card-value" id="dash-procs">—</p>
-          <span class="card-detail">running</span>
-        </div>
-        <div class="dash-card span2">
-          <div class="card-top"><span class="card-label">Swap</span></div>
-          <p class="card-value" id="dash-swap-val">—</p>
-          <div class="card-bar-wrap"><div class="card-bar-fill swap" id="dash-swap-bar" style="width:0%"></div></div>
-          <span class="card-detail" id="dash-swap-detail"></span>
-        </div>
-
-        <!-- Row 3: 2 boxes stretched -->
-        <div class="dash-card span3">
-          <div class="card-top"><span class="card-label">CPU</span></div>
-          <p class="card-value" id="dash-cpu-val">—</p>
-          <div class="card-bar-wrap"><div class="card-bar-fill cpu" id="dash-cpu-bar" style="width:0%"></div></div>
-        </div>
-        <div class="dash-card span3">
-          <div class="card-top"><span class="card-label">Memory</span></div>
-          <p class="card-value" id="dash-ram-val">—</p>
-          <div class="card-bar-wrap"><div class="card-bar-fill ram" id="dash-ram-bar" style="width:0%"></div></div>
-          <span class="card-detail" id="dash-ram-detail"></span>
-        </div>
-
-        <!-- Row 4: full width -->
-        <div class="dash-card span6">
-          <div class="card-top"><span class="card-label">System Info</span></div>
-          <pre class="card-fetch" id="dash-fetch">—</pre>
-        </div>
-      </div>
-    </section>
-
-    <section id="calendar" class="tab-content">
-      <div class="cal-wrap">
-        <div class="cal-main">
-          <div class="cal-nav">
-            <button id="cal-prev">&lt;</button>
-            <h2 id="cal-nav-title">Loading...</h2>
-            <button id="cal-next">&gt;</button>
+          <span class="picker-label" style="margin-left: 10px;">Or Color:</span>
+          <div class="picker-row">
+            <button type="button" class="av-opt selected" data-color="#5b6fde" style="background:#5b6fde"></button>
+            <button type="button" class="av-opt" data-color="#3b82f6" style="background:#3b82f6"></button>
+            <button type="button" class="av-opt" data-color="#10b981" style="background:#10b981"></button>
+            <button type="button" class="av-opt" data-color="#f59e0b" style="background:#f59e0b"></button>
+            <button type="button" class="av-opt" data-color="#ef4444" style="background:#ef4444"></button>
+            <button type="button" class="av-opt" data-color="#8b5cf6" style="background:#8b5cf6"></button>
+            <button type="button" class="av-opt" data-color="#ec4899" style="background:#ec4899"></button>
+            <button type="button" class="av-opt" data-color="#64748b" style="background:#64748b"></button>
           </div>
-          <div class="cal-grid" id="cal-grid"></div>
         </div>
-        <div class="cal-sidebar">
-          <h3>Upcoming</h3>
-          <div id="cal-sidebar-list"><p class="cal-side-empty">Loading...</p></div>
-          <p class="cal-tz-note">All times shown in your local timezone</p>
-        </div>
+
+        <form id="comment-form" autocomplete="off">
+          <input type="hidden" id="comment-avatar-color" value="#5b6fde">
+          <input type="hidden" id="comment-avatar-b64" value="">
+          <input type="text" id="comment-name" placeholder="Name (optional)" maxlength="32">
+          <textarea id="comment-message" placeholder="Write something..." maxlength="300" required></textarea>
+          <div class="steam-submit-row">
+            <span id="char-count">300</span>
+            <button type="submit" id="comment-submit">Post Comment</button>
+          </div>
+        </form>
       </div>
-    </section>
 
-    <script src="js/gallery.js" defer></script>
-    <script src="js/tabs.js" defer></script>
+      <!-- Comments feed -->
+      <div id="comments-list"></div>
 
-    <!-- Firebase SDK (loaded before comments.js) -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-    <script src="js/comments.js"></script>
-    <script src="js/yuukabot.js"></script>
-    <script src="js/calendar.js"></script>
+      <!-- Pagination -->
+      <div id="comments-pagination" class="steam-pagination"></div>
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
-      <span class="lightbox-close">&times;</span>
-      <img class="lightbox-content" id="lightbox-img">
     </div>
-    </body>
+  </section>
+
+  <section id="gallery" class="tab-content">
+    <div class="gallery-grid">
+    </div>
+    <div id="gallery-container" class="gallery-grid"></div>
+  </section>
+
+  <section id="ahmet" class="tab-content">
+    <div id="ahmet-container">
+    </div>
+  </section>
+
+  <section id="yuukabot" class="tab-content">
+    <header class="dash-header">
+      <h1><span class="status-dot" id="dash-status-dot"></span>Yuuka Bot</h1>
+    </header>
+
+    <div class="dash-grid">
+      <!-- Row 1: 3 boxes -->
+      <div class="dash-card span2">
+        <div class="card-top"><span class="card-label">Uptime</span></div>
+        <p class="card-value" id="dash-uptime">—</p>
+        <div class="card-spacer"></div>
+      </div>
+      <div class="dash-card span2">
+        <div class="card-top"><span class="card-label">Disk</span></div>
+        <p class="card-value" id="dash-disk-val">—</p>
+        <div class="card-bar-wrap">
+          <div class="card-bar-fill disk" id="dash-disk-bar" style="width:0%"></div>
+        </div>
+        <span class="card-detail" id="dash-disk-detail"></span>
+      </div>
+      <div class="dash-card span2">
+        <div class="card-top"><span class="card-label">Load Average</span></div>
+        <p class="card-value" id="dash-load">—</p>
+        <span class="card-detail">1m / 5m / 15m</span>
+      </div>
+
+      <!-- Row 2: 3 boxes -->
+      <div class="dash-card span2">
+        <div class="card-top"><span class="card-label">Network</span></div>
+        <p class="card-value" id="dash-net">—</p>
+        <span class="card-detail" id="dash-net-detail"></span>
+      </div>
+      <div class="dash-card span2">
+        <div class="card-top"><span class="card-label">Processes</span></div>
+        <p class="card-value" id="dash-procs">—</p>
+        <span class="card-detail">running</span>
+      </div>
+      <div class="dash-card span2">
+        <div class="card-top"><span class="card-label">Swap</span></div>
+        <p class="card-value" id="dash-swap-val">—</p>
+        <div class="card-bar-wrap">
+          <div class="card-bar-fill swap" id="dash-swap-bar" style="width:0%"></div>
+        </div>
+        <span class="card-detail" id="dash-swap-detail"></span>
+      </div>
+
+      <!-- Row 3: 2 boxes stretched -->
+      <div class="dash-card span3">
+        <div class="card-top"><span class="card-label">CPU</span></div>
+        <p class="card-value" id="dash-cpu-val">—</p>
+        <div class="card-bar-wrap">
+          <div class="card-bar-fill cpu" id="dash-cpu-bar" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="dash-card span3">
+        <div class="card-top"><span class="card-label">Memory</span></div>
+        <p class="card-value" id="dash-ram-val">—</p>
+        <div class="card-bar-wrap">
+          <div class="card-bar-fill ram" id="dash-ram-bar" style="width:0%"></div>
+        </div>
+        <span class="card-detail" id="dash-ram-detail"></span>
+      </div>
+
+      <!-- Row 4: full width -->
+      <div class="dash-card span6">
+        <div class="card-top"><span class="card-label">System Info</span></div>
+        <pre class="card-fetch" id="dash-fetch">—</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="calendar" class="tab-content">
+    <div class="cal-wrap">
+      <div class="cal-main">
+        <div class="cal-nav">
+          <button id="cal-prev">&lt;</button>
+          <h2 id="cal-nav-title">Loading...</h2>
+          <button id="cal-next">&gt;</button>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+      <div class="cal-sidebar">
+        <h3>Upcoming</h3>
+        <div id="cal-sidebar-list">
+          <p class="cal-side-empty">Loading...</p>
+        </div>
+        <p class="cal-tz-note">All times shown in your local timezone</p>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/gallery.js" defer></script>
+  <script src="js/tabs.js" defer></script>
+
+  <!-- Firebase SDK (loaded before comments.js) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/comments.js"></script>
+  <script src="js/yuukabot.js"></script>
+  <script src="js/calendar.js"></script>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+  </div>
+</body>
+
 </html>
