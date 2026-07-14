@@ -15,21 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
     return '/' + (tabId === 'about' ? '' : tabId);
   }
 
-  // ── Swap background videos ─────────────────────────────
+  // ── Swap background videos + top-bar theme ────────────
+  const topLine = document.getElementById('top-line');
+
   function setBgForTab(tabId) {
-    if (!calVideo || !mainVideo) return;
     if (tabId === 'calendar') {
       // Switch to calendar background
-      mainVideo.style.display = 'none';
-      mainVideo.pause();
-      calVideo.style.display = 'block';
-      calVideo.play().catch(() => {}); // ignore autoplay blocks
+      if (mainVideo) { mainVideo.style.display = 'none'; mainVideo.pause(); }
+      if (calVideo) { calVideo.style.display = 'block'; calVideo.play().catch(() => {}); }
+      if (topLine) topLine.classList.add('cal-theme');
     } else {
       // Switch back to main background
-      calVideo.style.display = 'none';
-      calVideo.pause();
-      mainVideo.style.display = 'block';
-      if (mainVideo.paused) mainVideo.play().catch(() => {});
+      if (calVideo) { calVideo.style.display = 'none'; calVideo.pause(); }
+      if (mainVideo) { mainVideo.style.display = 'block'; if (mainVideo.paused) mainVideo.play().catch(() => {}); }
+      if (topLine) topLine.classList.remove('cal-theme');
     }
   }
 

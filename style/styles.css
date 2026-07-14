@@ -66,6 +66,22 @@ html, body {
     text-decoration: underline;
 }
 
+/* ── Calendar-themed top bar ──────────────────────────── */
+#top-line.cal-theme {
+    background-color: rgba(35,35,41,0.85);
+    transition: background-color 0.4s ease;
+}
+#top-line.cal-theme button {
+    border-bottom-color: #FBC4CC;
+    border-left-color: #FBC4CC;
+    border-right-color: #FBC4CC;
+    color: #F4F2F5;
+    transition: border-color 0.4s ease, color 0.4s ease;
+}
+#top-line.cal-theme #home-btn {
+    filter: brightness(0) invert(1); /* makes a dark logo white */;
+}
+
 title {
     font-size: large;
     font-weight: 100;
