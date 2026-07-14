@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const tabs = document.querySelectorAll('.tab-content');
+  const mainVideo = document.getElementById('background-video');
+  const calVideo = document.getElementById('calendar-background-video');
 
   // ── Map URL path → tab id ──────────────────────────────
   function pathToTab(path) {
-    // strip leading/trailing slashes, default to "about"
     const slug = path.replace(/^\/+|\/+$/g, '') || 'about';
-    // known slugs — everything else falls back to about
     const valid = ['about', 'gallery', 'ahmet', 'yuukabot', 'calendar'];
     return valid.includes(slug) ? slug : 'about';
   }
@@ -15,11 +15,30 @@ document.addEventListener('DOMContentLoaded', () => {
     return '/' + (tabId === 'about' ? '' : tabId);
   }
 
+  // ── Swap background videos ─────────────────────────────
+  function setBgForTab(tabId) {
+    if (!calVideo || !mainVideo) return;
+    if (tabId === 'calendar') {
+      // Switch to calendar background
+      mainVideo.style.display = 'none';
+      mainVideo.pause();
+      calVideo.style.display = 'block';
+      calVideo.play().catch(() => {}); // ignore autoplay blocks
+    } else {
+      // Switch back to main background
+      calVideo.style.display = 'none';
+      calVideo.pause();
+      mainVideo.style.display = 'block';
+      if (mainVideo.paused) mainVideo.play().catch(() => {});
+    }
+  }
+
   // ── Show a specific tab ────────────────────────────────
   function showTab(tabId) {
     tabs.forEach(t => t.style.display = 'none');
     const target = document.getElementById(tabId);
     if (target) target.style.display = 'block';
+    setBgForTab(tabId);
   }
 
   // ── Navigate to a tab (updates URL + shows it) ────────

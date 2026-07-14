@@ -16,7 +16,8 @@ html, body {
     height: 100%;
     overflow-x: hidden;
 }
-#background-video {
+#background-video,
+#calendar-background-video {
     position: fixed;
     right: 0%;
     left: 0%;
