@@ -3,11 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabs = document.querySelectorAll('.tab-content');
   const mainVideo = document.getElementById('background-video');
   const calVideo = document.getElementById('calendar-background-video');
+  const czVideo = document.getElementById('czscores-background-video');
 
   // ── Map URL path → tab id ──────────────────────────────
   function pathToTab(path) {
     const slug = path.replace(/^\/+|\/+$/g, '') || 'about';
-    const valid = ['about', 'gallery', 'ahmet', 'yuukabot', 'calendar'];
+    const valid = ['about', 'gallery', 'czscores', 'yuukabot', 'calendar'];
+    // backward compat: old /ahmet links
+    if (slug === 'ahmet') return 'czscores';
     return valid.includes(slug) ? slug : 'about';
   }
 
@@ -18,17 +21,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Swap background videos + top-bar theme ────────────
   const topLine = document.getElementById('top-line');
 
+  // map tab id → its dedicated video element (null = use main)
+  const tabVideos = {
+    calendar: calVideo,
+    czscores: czVideo
+  };
+
   function setBgForTab(tabId) {
-    if (tabId === 'calendar') {
-      // Switch to calendar background
-      if (mainVideo) { mainVideo.style.display = 'none'; mainVideo.pause(); }
-      if (calVideo) { calVideo.style.display = 'block'; calVideo.play().catch(() => {}); }
-      if (topLine) topLine.classList.add('cal-theme');
-    } else {
-      // Switch back to main background
-      if (calVideo) { calVideo.style.display = 'none'; calVideo.pause(); }
-      if (mainVideo) { mainVideo.style.display = 'block'; if (mainVideo.paused) mainVideo.play().catch(() => {}); }
-      if (topLine) topLine.classList.remove('cal-theme');
+    // Hide + pause ALL videos first
+    [mainVideo, calVideo, czVideo].forEach(v => {
+      if (v) { v.style.display = 'none'; v.pause(); }
+    });
+
+    // Show the right one
+    const target = tabVideos[tabId];
+    if (target) {
+      target.style.display = 'block';
+      target.play().catch(() => {});
+    } else if (mainVideo) {
+      mainVideo.style.display = 'block';
+      if (mainVideo.paused) mainVideo.play().catch(() => {});
+    }
+
+    // Top-bar theme toggle
+    if (topLine) {
+      topLine.classList.toggle('cal-theme', tabId === 'calendar');
+      topLine.classList.toggle('czscores-theme', tabId === 'czscores');
     }
   }
 

@@ -66,7 +66,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Load your original Gallery
   loadGallery('gallery-container', 'gallery', 50);
-
-  // Load your new Ahmet Museum (adjust the number 20 to however many photos you have)
-  loadGallery('ahmet-container', 'ahmet', 20);
 });

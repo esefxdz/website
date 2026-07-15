@@ -17,7 +17,8 @@ html, body {
     overflow-x: hidden;
 }
 #background-video,
-#calendar-background-video {
+#calendar-background-video,
+#czscores-background-video {
     position: fixed;
     right: 0%;
     left: 0%;
@@ -72,6 +73,15 @@ html, body {
     border-left-color: #FBC4CC;
     border-right-color: #FBC4CC;
     color: #F4F2F5;
+    transition: border-color 0.4s ease, color 0.4s ease;
+}
+
+/* ── Cz Scores-themed top bar buttons ─────────────────── */
+#top-line.czscores-theme button {
+    border-bottom-color: #B5B1C6;
+    border-left-color: #B5B1C6;
+    border-right-color: #B5B1C6;
+    color: #B84457;
     transition: border-color 0.4s ease, color 0.4s ease;
 }
 

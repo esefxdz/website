@@ -46,4 +46,3 @@ def create_thumbnails(base_folder):
 
 if __name__ == "__main__":
     create_thumbnails("gallery")
-    create_thumbnails("ahmet")
