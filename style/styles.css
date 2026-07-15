@@ -60,7 +60,7 @@ html, body {
     cursor: pointer;
     font-weight: bold;
     background-color: transparent;
-    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.4s ease, color 0.4s ease;
 }
 
 #top-line button:hover {
