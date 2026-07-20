@@ -18,7 +18,7 @@ html, body {
 }
 #background-video,
 #calendar-background-video,
-#czscores-background-video {
+#bucketlist-background-video {
     position: fixed;
     right: 0%;
     left: 0%;
@@ -76,8 +76,8 @@ html, body {
     transition: border-color 0.4s ease, color 0.4s ease;
 }
 
-/* ── Cz Scores-themed top bar buttons ─────────────────── */
-#top-line.czscores-theme button {
+/* ── Bucketlist-themed top bar buttons ─────────────────── */
+#top-line.bucketlist-theme button {
     border-bottom-color: #B5B1C6;
     border-left-color: #B5B1C6;
     border-right-color: #B5B1C6;

@@ -1,0 +1,73 @@
+/* Bucketlist tab — baked-in left panel, internal scroll only */
+
+/* ── Lock section to viewport so body never scrolls ────────── */
+#bucketlist.tab-content {
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ── Panel (framed, no extra space) ────────────────────────── */
+.bl-panel {
+    width: 420px;
+    height: calc(100vh - 210px);
+    margin: 125px 0 85px 48px;
+    background: rgba(35, 35, 41, 0.6);
+    border: 1px solid rgba(181, 177, 198, 0.18);
+    border-radius: 10px;
+    padding: 0;
+    color: #F4F2F5;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ── Scrollable list (fills the frame exactly) ────────────── */
+.bl-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    flex: 1;
+    padding: 14px 16px;
+}
+
+/* ── Item card ────────────────────────────────────────────── */
+.bl-item {
+    padding: 14px 18px;
+    background: rgba(35, 35, 41, 0.75);
+    border: 1px solid rgba(181, 177, 198, 0.08);
+    border-radius: 8px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    flex-shrink: 0;
+}
+.bl-item:hover {
+    border-color: rgba(184, 68, 87, 0.3);
+    box-shadow: 0 3px 16px rgba(184, 68, 87, 0.08);
+}
+
+.bl-item .bl-title {
+    color: #F4F2F5;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+.bl-item .bl-date {
+    color: rgba(244, 242, 245, 0.45);
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+}
+.bl-item .bl-desc {
+    color: rgba(244, 242, 245, 0.55);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+/* ── Empty state ─────────────────────────────────────────── */
+.bl-empty {
+    text-align: center;
+    color: rgba(244, 242, 245, 0.3);
+    padding: 60px 0;
+    font-family: Arial, sans-serif;
+    font-size: 0.82rem;
+}

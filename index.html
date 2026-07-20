@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style/comments.css">
   <link rel="stylesheet" href="style/yuukabot.css">
   <link rel="stylesheet" href="style/calendar.css">
+  <link rel="stylesheet" href="style/bucketlist.css">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <title>Esef</title>
 </head>
@@ -19,14 +20,14 @@
   <video muted loop playsinline preload="none" id="calendar-background-video" style="display:none">
     <source src="textures/calendar_background.mp4" type="video/mp4">
   </video>
-  <video muted loop playsinline preload="none" id="czscores-background-video" style="display:none">
+  <video muted loop playsinline preload="none" id="bucketlist-background-video" style="display:none">
     <source src="textures/cz_background.mp4" type="video/mp4">
   </video>
   <div id="top-line">
     <a href="index.html" id="home-btn"></a>
     <button id="about-btn">About This Website</button>
     <button id="gallery-btn">Gallery</button>
-    <button id="czscores-btn">Cz Scores</button>
+    <button id="bucketlist-btn">Bucketlist</button>
     <button id="yuukabot-btn">Bot Status</button>
     <button id="calendar-btn">Calendar</button>
   </div>
@@ -116,8 +117,11 @@
     <div id="gallery-container" class="gallery-grid"></div>
   </section>
 
-<section id="czscores" class="tab-content">
-      <div id="czscores-container">
+<section id="bucketlist" class="tab-content">
+    <div class="bl-panel">
+      <div class="bl-list" id="bl-list">
+        <p class="bl-empty">Loading...</p>
+      </div>
     </div>
   </section>
 
@@ -221,6 +225,7 @@
   <script src="js/comments.js"></script>
   <script src="js/yuukabot.js"></script>
   <script src="js/calendar.js"></script>
+  <script src="js/bucketlist.js"></script>
 
   <!-- Lightbox -->
   <div id="lightbox" class="lightbox">

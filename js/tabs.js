@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabs = document.querySelectorAll('.tab-content');
   const mainVideo = document.getElementById('background-video');
   const calVideo = document.getElementById('calendar-background-video');
-  const czVideo = document.getElementById('czscores-background-video');
+  const bucketlistVideo = document.getElementById('bucketlist-background-video');
 
   // ── Map URL path → tab id ──────────────────────────────
   function pathToTab(path) {
     const slug = path.replace(/^\/+|\/+$/g, '') || 'about';
-    const valid = ['about', 'gallery', 'czscores', 'yuukabot', 'calendar'];
+    const valid = ['about', 'gallery', 'bucketlist', 'yuukabot', 'calendar'];
     // backward compat: old /ahmet links
-    if (slug === 'ahmet') return 'czscores';
+    if (slug === 'ahmet') return 'bucketlist';
     return valid.includes(slug) ? slug : 'about';
   }
 
@@ -24,12 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // map tab id → its dedicated video element (null = use main)
   const tabVideos = {
     calendar: calVideo,
-    czscores: czVideo
+    bucketlist: bucketlistVideo
   };
 
   function setBgForTab(tabId) {
     // Hide + pause ALL videos first
-    [mainVideo, calVideo, czVideo].forEach(v => {
+    [mainVideo, calVideo, bucketlistVideo].forEach(v => {
       if (v) { v.style.display = 'none'; v.pause(); }
     });
 
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Top-bar theme toggle
     if (topLine) {
       topLine.classList.toggle('cal-theme', tabId === 'calendar');
-      topLine.classList.toggle('czscores-theme', tabId === 'czscores');
+      topLine.classList.toggle('bucketlist-theme', tabId === 'bucketlist');
     }
   }
 
