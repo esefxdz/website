@@ -1,4 +1,65 @@
-/* Bucketlist tab — baked-in left panel, internal scroll only */
+/* Bucketlist tab — password gated, baked-in left panel, internal scroll only */
+
+/* ── Lock screen (pitch black, centered form) ─────────────── */
+.bl-lock {
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bl-lock-box {
+    text-align: center;
+    color: #F4F2F5;
+}
+.bl-lock-box h2 {
+    margin: 0 0 24px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+.bl-lock-box input {
+    display: block;
+    width: 260px;
+    margin: 0 auto 12px;
+    padding: 10px 14px;
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.95rem;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.bl-lock-box input:focus {
+    border-color: rgba(184, 68, 87, 0.5);
+}
+.bl-lock-box button {
+    width: 260px;
+    padding: 10px 0;
+    background: rgba(184, 68, 87, 0.8);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.bl-lock-box button:hover {
+    background: rgba(184, 68, 87, 1);
+}
+.bl-lock-box button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+#bl-err {
+    color: #e05555;
+    font-size: 0.78rem;
+    margin-top: 12px;
+    min-height: 1.2em;
+}
 
 /* ── Lock section to viewport so body never scrolls ────────── */
 #bucketlist.tab-content {
@@ -45,6 +106,10 @@
     border-color: rgba(184, 68, 87, 0.3);
     box-shadow: 0 3px 16px rgba(184, 68, 87, 0.08);
 }
+
+/* TODO: .bl-done styles — dim + strikethrough for completed items */
+/* .bl-item.bl-done { opacity: 0.5; }
+   .bl-item.bl-done .bl-title { text-decoration: line-through; } */
 
 .bl-item .bl-title {
     color: #F4F2F5;
