@@ -18,7 +18,8 @@ html, body {
 }
 #background-video,
 #calendar-background-video,
-#bucketlist-background-video {
+#bucketlist-background-video,
+#yuukabot-background-video {
     position: fixed;
     right: 0%;
     left: 0%;

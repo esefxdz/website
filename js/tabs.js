@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainVideo = document.getElementById('background-video');
   const calVideo = document.getElementById('calendar-background-video');
   const bucketlistVideo = document.getElementById('bucketlist-background-video');
+  const botVideo = document.getElementById('yuukabot-background-video');
 
   // ── Map URL path → tab id ──────────────────────────────
   function pathToTab(path) {
@@ -24,12 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // map tab id → its dedicated video element (null = use main)
   const tabVideos = {
     calendar: calVideo,
-    bucketlist: bucketlistVideo
+    bucketlist: bucketlistVideo,
+    yuukabot: botVideo
   };
 
   function setBgForTab(tabId) {
     // Hide + pause ALL videos first
-    [mainVideo, calVideo, bucketlistVideo].forEach(v => {
+    [mainVideo, calVideo, bucketlistVideo, botVideo].forEach(v => {
       if (v) { v.style.display = 'none'; v.pause(); }
     });
 
