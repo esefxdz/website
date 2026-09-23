@@ -1,22 +1,8 @@
-#gallery-link-btn {
-    background-color:aliceblue;
-    color:#f0f8ff;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-}
-
-#gallery-link-btn:hover {
-    box-shadow: 0 0 10px #02e3ff;
-}
-
 .gallery-grid {
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 10px;
-    padding: 70px;
+    padding: 210px 70px 70px; /* extra top padding clears the fixed nav bar */
 }
 
 .gallery-grid img {

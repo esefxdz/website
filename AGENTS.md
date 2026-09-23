@@ -5,26 +5,26 @@
 ```
 website/
 ├── index.html              # Single-page entry point — all 5 tabs live here
-├── gallery-container.html  # Static gallery image tags (50 images)
 ├── _redirects              # Netlify SPA rewrite rule (/* → /index.html)
 ├── js/
 │   ├── tabs.js             # Client-side routing, tab switching, background video swap
 │   ├── comments.js         # Steam-style comment wall (Firestore: comments + stats)
 │   ├── yuukabot.js         # Live bot dashboard (Firestore: sysinfo/server)
 │   ├── calendar.js         # Event calendar (Firestore: calendar_events)
-│   └── gallery.js          # Lightbox + dynamic thumbnail loader
+│   ├── bucketlist.js       # Password-gated list (Firestore: bucketlist_auth + bucketlist_data)
+│   └── gallery.js          # Lightbox + thumbnail grid built from gallery/manifest.json
 ├── style/
 │   ├── styles.css          # Global layout, nav bar, base typography
 │   ├── comments.css        # Steam-profile comment UI
 │   ├── yuukabot.css        # Dashboard glassmorphism cards + grid
 │   ├── calendar.css        # Calendar grid, popups, sidebar
-│   ├── gallery.css         # Gallery grid + lightbox
-│   └── ahmet.css           # Bucketlist tab button
-├── gallery/                # 50 full-quality images + thumbnails/ subdirectory
+│   ├── bucketlist.css      # Lock screen + list panel
+│   └── gallery.css         # Gallery grid + lightbox
+├── gallery/                # Full-quality images, thumbnails/, and manifest.json
 ├── textures/               # Background MP4 videos + clickable character PNG
 ├── sounds/                 # Click SFX (yuuka_click.mp3)
-├── generate_thumbnails.py  # Pillow script: resizes gallery/ images → thumbnails/
-└── firebase.txt            # Firestore security rules (reference only)
+├── generate_thumbnails.py  # Pillow script: builds thumbnails/ + manifest.json
+└── firebase.txt            # Firestore security rules (reference only, gitignored)
 ```
 
 - **No frameworks, no build step, no package manager.** Every file is served directly.
@@ -44,7 +44,7 @@ npx serve .
 ```
 
 - `_redirects` handles SPA routing on Netlify; for local dev, navigate to `/index.html` directly.
-- `generate_thumbnails.py` regenerates gallery thumbnails: `python generate_thumbnails.py`. Requires `Pillow`.
+- After adding images to `gallery/`, run `python generate_thumbnails.py` (requires `Pillow`). It creates missing thumbnails and rewrites `gallery/manifest.json`, which is the list the gallery renders — an image not in the manifest won't show up.
 
 There are **no automated tests** in this project.
 
@@ -52,7 +52,7 @@ There are **no automated tests** in this project.
 
 - **HTML:** Semantic elements where practical. Tab contents use `<section id="…" class="tab-content">`. IDs are kebab-case.
 - **CSS:** Each tab has its own stylesheet under `style/`. Class names follow BEM-lite (`cal-day`, `dash-card`). CSS variables define layout knobs (`--dash-columns`, `--dash-gap`).
-- **JavaScript:** Vanilla ES6+, no transpilation. Functions are `camelCase`, DOM-referencing IDs match kebab-case HTML IDs. Each script is self-contained with a `DOMContentLoaded` guard. Firebase config is repeated per-file (same values) — keep this pattern.
+- **JavaScript:** Vanilla ES6+, no transpilation. Functions are `camelCase`, DOM-referencing IDs match kebab-case HTML IDs. Each script is self-contained with a `DOMContentLoaded` guard, and Firestore-backed scripts are wrapped in an IIFE so their helpers don't leak into (and clobber each other in) the global scope. Firebase config is repeated per-file (same values) — keep this pattern.
 - **Whitespace:** 4-space indentation in JS/CSS, 2-space in HTML. No trailing semicolons are required but consistency within each file is expected.
 - No linters or formatters are configured.
 
@@ -76,6 +76,8 @@ Examples from the repo: `calendar added`, `fix upcoming filter`, `css polish bs`
 - **Firebase API keys** are public by design (they identify the project, not authenticate). Do not commit service-account credentials or `.env` files.
 - `firebase.txt` is in `.gitignore` — keep the live rules reference there, not hardcoded in source.
 - All Firestore writes are guarded by security rules (see `firebase.txt`): only `comments` and `stats/global_clicks` accept public writes; everything else is read-only.
+- Use `allow get` (not `allow read`) for collections keyed by a secret, like `bucketlist_auth` — `read` also permits listing every document.
+- Editing `firebase.txt` does nothing by itself: paste it into Firebase Console → Firestore → Rules and publish.
 
 ## Adding a New Feature
 

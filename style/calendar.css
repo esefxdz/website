@@ -1,11 +1,5 @@
 /* Calendar tab */
 
-#calendar-btn {
-    background-color: #FBC4CC; color: #232329;
-    border: none; padding: 12px 24px; border-radius: 8px;
-    cursor: pointer; transition: box-shadow 0.3s ease;
-}
-
 /* ── Two-column layout ─────────────────────────────────────── */
 .cal-wrap {
     max-width: 95vw; margin: 0 auto;
@@ -93,7 +87,7 @@
 }
 
 /* ── Sidebar ───────────────────────────────────────────────── */
-.cal-sidebar h3 { margin-top: 0;
+.cal-sidebar h3 {
     font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
     color: rgba(244,242,245,0.65); margin: 0 0 14px;
     font-family: Arial, sans-serif;

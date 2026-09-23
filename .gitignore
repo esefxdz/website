@@ -7,3 +7,5 @@ Thumbs.db
 .DS_Store
 firebase.txt
 manipulate_boxes.md
+bot/
+AGENTS.md

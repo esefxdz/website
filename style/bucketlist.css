@@ -107,9 +107,9 @@
     box-shadow: 0 3px 16px rgba(184, 68, 87, 0.08);
 }
 
-/* TODO: .bl-done styles — dim + strikethrough for completed items */
-/* .bl-item.bl-done { opacity: 0.5; }
-   .bl-item.bl-done .bl-title { text-decoration: line-through; } */
+/* Completed items */
+.bl-item.bl-done { opacity: 0.5; }
+.bl-item.bl-done .bl-title { text-decoration: line-through; }
 
 .bl-item .bl-title {
     color: #F4F2F5;

@@ -97,18 +97,6 @@
     margin: 0;
 }
 
-/* ── Firebase warning ────────────────────────────────────── */
-#firebase-setup-warning {
-    background: rgba(180, 80, 30, 0.25);
-    border-bottom: 1px solid rgba(180, 80, 30, 0.4);
-    padding: 10px 14px;
-    color: #ffb89a;
-    font-size: 0.8rem;
-    line-height: 1.5;
-    display: none;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 /* ── Comment rows ────────────────────────────────────────── */
 #comments-list {
     display: flex;
@@ -169,7 +157,7 @@
     flex-wrap: wrap;
 }
 
-/* Steam cyan username -> Now Black */
+/* Username */
 .comment-name {
     font-size: 0.85rem;
     font-weight: bold;
@@ -209,12 +197,10 @@
     font-style: italic;
 }
 
-/* ── Post form (bottom, Steam style) ────────────────────── */
+/* ── Post form (above the feed) ──────────────────────────── */
 .steam-form-area {
     background: transparent;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 20px 0 0 0;
-    margin-top: 10px;
+    margin: 20px 0;
 }
 
 .steam-form-label {
@@ -337,13 +323,6 @@
     transform: scale(1.05);
 }
 #comment-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
-
-/* Comment count next to header */
-.comment-count-badge {
-    font-size: 0.72rem;
-    color: #556772;
-    font-family: Arial, Helvetica, sans-serif;
-}
 
 /* ── Custom PFP Upload ───────────────────────────────────── */
 .custom-pfp-upload {

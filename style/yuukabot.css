@@ -7,14 +7,10 @@
     --dash-columns: 6;            /* number of columns (2 = 2×2, 3 = 3-wide, etc.) */
     --dash-gap: 20px;             /* space between boxes */
     --dash-min-card-height: 200px;/* minimum height of each box */
-    --dash-max-width: none;     /* max width of the whole grid */
-    --dash-padding: 120px 48px 60px; /* top right/left bottom */
+    --dash-max-width: none;       /* max width of the whole grid */
 }
 
-/* To make boxes take different amounts of space, add a class
-   to the HTML like "wide" or "tall" and define it here:
-   
-   .dash-card.tall { grid-row: span 2; }                     */
+/* Card widths come from the .spanN helpers at the bottom of this file. */
 
 /* ── Tab header ───────────────────────────────────────────── */
 .dash-header {
@@ -41,6 +37,7 @@
     50%      { box-shadow: 0 0 20px #22c55e, 0 0 40px rgba(34,197,94,0.4); }
 }
 .dash-header .offline { background: #ef4444; box-shadow: 0 0 12px #ef4444; animation: none; }
+.dash-header .pending { background: #64748b; box-shadow: none; animation: none; }
 
 /* ── Card grid ────────────────────────────────────────────── */
 .dash-grid {
@@ -71,18 +68,11 @@
     box-shadow: 0 6px 28px rgba(91, 111, 222, 0.12);
 }
 
-/* ── Card header (icon + label) ───────────────────────────── */
+/* ── Card header ──────────────────────────────────────────── */
 .card-top {
     display: flex;
     align-items: center;
     gap: 12px;
-}
-.card-icon {
-    font-size: 1.6rem;
-    width: 44px; height: 44px;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(91, 111, 222, 0.12);
-    border-radius: 10px;
 }
 .card-label {
     font-size: 0.8rem;
@@ -133,18 +123,6 @@
     margin-top: 6px;
 }
 
-/* ── Footer ───────────────────────────────────────────────── */
-.dash-footer {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.2);
-    font-size: 0.7rem;
-    padding-bottom: 50px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* ── Wide card (span 2 columns) ────────────────────────────── */
-
-
 /* ── Fastfetch text block ──────────────────────────────────── */
 .card-fetch {
     margin: 12px 0 0;
@@ -160,4 +138,3 @@
 .dash-card.span2 { grid-column: span 2; }  /* 3 per row */
 .dash-card.span3 { grid-column: span 3; }  /* 2 per row — stretched */
 .dash-card.span6 { grid-column: span 6; }  /* full width */
-.card-spacer { height: 32px; }

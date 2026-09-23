@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
   <link rel="stylesheet" href="style/styles.css">
   <link rel="stylesheet" href="style/gallery.css">
-  <link rel="stylesheet" href="style/ahmet.css">
   <link rel="stylesheet" href="style/comments.css">
   <link rel="stylesheet" href="style/yuukabot.css">
   <link rel="stylesheet" href="style/calendar.css">
@@ -24,7 +24,6 @@
     <source src="textures/cz_background.mp4" type="video/mp4">
   </video>
   <div id="top-line">
-    <a href="index.html" id="home-btn"></a>
     <button id="about-btn">About This Website</button>
     <button id="gallery-btn">Gallery</button>
     <button id="bucketlist-btn">Bucketlist</button>
@@ -57,13 +56,8 @@
         <span id="comments-title"></span>
       </div>
 
-      <div id="firebase-setup-warning">
-        ⚠️ <strong>Setup needed:</strong> Open <code>js/comments.js</code> and follow the setup instructions at the top
-        of the file.
-      </div>
-
       <!-- Post form — at the top -->
-      <div class="steam-form-area" style="margin-bottom: 20px; border-top: none; padding-top: 0; margin-top: 20px;">
+      <div class="steam-form-area">
         <p class="steam-form-label">Leave a comment:</p>
 
         <!-- Avatar picker -->
@@ -112,16 +106,14 @@
   </section>
 
   <section id="gallery" class="tab-content">
-    <div class="gallery-grid">
-    </div>
     <div id="gallery-container" class="gallery-grid"></div>
   </section>
 
-<section id="bucketlist" class="tab-content"></section>
+  <section id="bucketlist" class="tab-content"></section>
 
   <section id="yuukabot" class="tab-content">
     <header class="dash-header">
-      <h1><span class="status-dot" id="dash-status-dot"></span>Yuuka Bot</h1>
+      <h1><span class="status-dot pending" id="dash-status-dot"></span>Yuuka Bot</h1>
     </header>
 
     <div class="dash-grid">
@@ -129,7 +121,7 @@
       <div class="dash-card span2">
         <div class="card-top"><span class="card-label">Uptime</span></div>
         <p class="card-value" id="dash-uptime">—</p>
-        <div class="card-spacer"></div>
+        <span class="card-detail" id="dash-bot-uptime"></span>
       </div>
       <div class="dash-card span2">
         <div class="card-top"><span class="card-label">Disk</span></div>
@@ -210,22 +202,22 @@
     </div>
   </section>
 
+  <!-- Lightbox (gallery) -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="">
+  </div>
+
   <script src="js/gallery.js" defer></script>
   <script src="js/tabs.js" defer></script>
 
-  <!-- Firebase SDK (loaded before comments.js) -->
+  <!-- Firebase SDK (must load before the Firestore-backed scripts below) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="js/comments.js"></script>
   <script src="js/yuukabot.js"></script>
   <script src="js/calendar.js"></script>
   <script src="js/bucketlist.js"></script>
-
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox">
-    <span class="lightbox-close">&times;</span>
-    <img class="lightbox-content" id="lightbox-img">
-  </div>
 </body>
 
 </html>

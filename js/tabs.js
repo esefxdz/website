@@ -59,15 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── Navigate to a tab (updates URL + shows it) ────────
-  function navigateTo(tabId, push = true) {
+  function navigateTo(tabId) {
     showTab(tabId);
-    if (push) {
-      history.pushState({ tab: tabId }, '', tabToPath(tabId));
-    }
+    window.scrollTo(0, 0);
+    history.pushState({ tab: tabId }, '', tabToPath(tabId));
   }
 
   // ── Initial load: show tab from URL ────────────────────
-  showTab(pathToTab(window.location.pathname));
+  // (also normalises unknown / legacy paths like /ahmet in the address bar)
+  const initialTab = pathToTab(window.location.pathname);
+  showTab(initialTab);
+  history.replaceState({ tab: initialTab }, '', tabToPath(initialTab) + window.location.search);
 
   // ── Tab button clicks ──────────────────────────────────
   const buttons = document.querySelectorAll('#top-line button');
@@ -78,22 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Home button (logo) ─────────────────────────────────
-  const homeBtn = document.getElementById('home-btn');
-  if (homeBtn) {
-    homeBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      navigateTo('about');
-    });
-  }
-
   // ── Back / forward browser buttons ─────────────────────
   window.addEventListener('popstate', (e) => {
-    if (e.state && e.state.tab) {
-      showTab(e.state.tab);
-    } else {
-      showTab(pathToTab(window.location.pathname));
-    }
+    showTab(e.state && e.state.tab ? e.state.tab : pathToTab(window.location.pathname));
   });
 
 });
