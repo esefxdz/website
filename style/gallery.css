@@ -2,7 +2,7 @@
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 10px;
-    padding: 210px 70px 70px; /* extra top padding clears the fixed nav bar */
+    padding: 210px 70px 70px; /* room for the nav bar */
 }
 
 .gallery-grid img {
@@ -69,4 +69,15 @@
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* mobile */
+@media (max-width: 900px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 6px;
+        padding: 72px 4px 20px;
+    }
+    .lightbox-content { max-width: 96%; }
+    .lightbox-close { top: 8px; right: 16px; }
 }

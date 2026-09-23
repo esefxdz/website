@@ -1,4 +1,4 @@
-// Calendar tab — timezone-aware (auto-converts to your local time)
+// calendar tab, shows everything in the visitor's timezone
 (() => {
     const FIREBASE_CONFIG = {
         apiKey: "AIzaSyDuSjEGEKx5FnWYnQq8f_owbpYRBRrl5x0",
@@ -40,11 +40,11 @@
         document.getElementById("cal-prev").onclick = () => shiftMonth(-1);
         document.getElementById("cal-next").onclick = () => shiftMonth(1);
 
-        // Auto-refresh every 60s so "Upcoming" stays current as time passes
+        // refresh every minute so old events drop off upcoming
         setInterval(render, 60000);
 
         function shiftMonth(delta) {
-            // Day 1 avoids overflow (e.g. Jan 31 + 1 month → Mar 3)
+            // day 1 or jan 31 + 1 month turns into march
             const d = new Date(viewYear, viewMonth + delta, 1);
             viewYear = d.getFullYear();
             viewMonth = d.getMonth();
@@ -113,10 +113,7 @@
         }
     });
 
-    // Normalise a Firestore doc into local date/time. Timed events use the
-    // `utc` timestamp so they land on the viewer's local day; date-only events
-    // keep their `date` (converting their midnight could shift them a day).
-    // Falls back to the raw fields when `utc` is missing or unparseable.
+    // events with a time get converted to local time, all day events keep their date
     function toEvent(d) {
         const utc = d.utc ? new Date(d.utc) : null;
         const hasUtc = utc && !isNaN(utc.getTime());
@@ -130,7 +127,6 @@
             description: d.description || "",
             date,
             time,
-            // 0 for malformed events keeps the sort stable and hides them from "Upcoming"
             when: (hasUtc ? utc.getTime() : new Date(date + "T" + (d.time || "00:00")).getTime()) || 0
         };
     }

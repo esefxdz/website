@@ -1,4 +1,4 @@
-// Yuuka Bot Dashboard — live Firestore reader
+// bot status dashboard
 (() => {
     const FIREBASE_CONFIG = {
         apiKey: "AIzaSyDuSjEGEKx5FnWYnQq8f_owbpYRBRrl5x0",
@@ -9,8 +9,7 @@
         appId: "1:353969651290:web:41e3aaf8e54c743702a263"
     };
 
-    // The bot pushes every 10s; no update for this long means it's down
-    // (generous so a visitor's slightly-off clock doesn't flip the dot).
+    // bot updates every 10s, nothing for a minute means it's probably dead
     const STALE_MS = 60 * 1000;
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -22,15 +21,15 @@
 
         const dot = document.getElementById("dash-status-dot");
         let online = false;
-        let updatedAt = null;  // ms; null for bots that don't send updatedAt yet
-        let loaded = false;    // keep the grey "pending" dot until first data
+        let updatedAt = null;
+        let loaded = false; // dot stays grey until the first data
 
         function refreshDot() {
             if (!loaded) return;
             const fresh = updatedAt == null || Date.now() - updatedAt < STALE_MS;
             if (dot) dot.className = online && fresh ? "status-dot" : "status-dot offline";
         }
-        // Re-check periodically: a crashed bot sends no more snapshots
+        // a crashed bot stops sending updates so keep checking
         setInterval(refreshDot, 5000);
 
         db.collection("sysinfo").doc("server").onSnapshot(doc => {
@@ -44,7 +43,6 @@
             setText("dash-uptime", d.uptime);
             setText("dash-bot-uptime", d.botUptime ? "bot up " + d.botUptime : "");
 
-            // CPU, RAM, Disk, Swap — value + bar
             setBar("dash-cpu-val", "dash-cpu-bar", d.cpu);
             setBar("dash-ram-val", "dash-ram-bar", d.ram);
             setBar("dash-disk-val", "dash-disk-bar", d.disk);

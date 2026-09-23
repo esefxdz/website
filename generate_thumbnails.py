@@ -1,14 +1,5 @@
-"""Build gallery thumbnails + manifest.
-
-Run after adding images to gallery/:
-    python generate_thumbnails.py
-
-- Converts animated GIFs to MP4 (needs ffmpeg on PATH). Same animation at a
-  few % of the size; the GIF stays as the source but the site uses the MP4.
-- Creates gallery/thumbnails/<name>.jpg (max 400x400) for any item missing one.
-- Rewrites gallery/manifest.json: the ordered list of full-size filenames
-  that js/gallery.js renders (the MP4 wins when a GIF has one).
-"""
+# run this after adding images to gallery/
+# makes thumbnails, turns gifs into way smaller mp4s (needs ffmpeg) and updates manifest.json
 import json
 import os
 import shutil
@@ -23,7 +14,7 @@ FFMPEG = shutil.which("ffmpeg")
 
 
 def sort_key(filename):
-    # Numeric names sort numerically (1, 2, ..., 10), anything else after, alphabetically
+    # so 10.jpg comes after 9.jpg
     stem = os.path.splitext(filename)[0]
     return (0, int(stem), "") if stem.isdigit() else (1, 0, stem.lower())
 
@@ -48,10 +39,10 @@ def convert_gifs(base_folder):
             continue
         with Image.open(src) as img:
             if getattr(img, "n_frames", 1) < 2:
-                continue  # still image, keep as GIF
+                continue  # not animated
         subprocess.run([
             FFMPEG, "-hide_banner", "-loglevel", "error", "-y", "-i", src,
-            "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2",   # h264 needs even sizes
+            "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2",  # mp4 needs even width/height
             "-c:v", "libx264", "-crf", "23", "-pix_fmt", "yuv420p",
             "-an", "-movflags", "+faststart", dst,
         ], check=True)
@@ -69,10 +60,9 @@ def make_thumbnail(src, thumb_path):
         ], check=True)
         return
     with Image.open(src) as img:
-        # JPEG needs RGB (e.g. for RGBA PNGs or palette GIFs)
         if img.mode != "RGB":
             img = img.convert("RGB")
-        img.thumbnail(THUMB_SIZE)  # keeps aspect ratio
+        img.thumbnail(THUMB_SIZE)
         img.save(thumb_path, "JPEG", quality=85)
 
 
@@ -82,7 +72,6 @@ def create_thumbnails(base_folder, files):
 
     count = 0
     for filename in files:
-        # Always save thumbnail as jpg
         stem = os.path.splitext(filename)[0]
         thumb_path = os.path.join(thumb_dir, f"{stem}.jpg")
         if os.path.exists(thumb_path):
@@ -98,7 +87,7 @@ def create_thumbnails(base_folder, files):
 
 
 def pick_for_site(files):
-    # One entry per name; prefer the MP4 over its source GIF
+    # use the mp4 instead of the gif when both exist
     chosen = {}
     for f in files:
         stem, ext = os.path.splitext(f)

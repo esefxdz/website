@@ -1,4 +1,4 @@
-// Bucketlist tab — password-gated, real-time Firestore list
+// password locked bucketlist
 (() => {
     const FIREBASE_CONFIG = {
         apiKey: "AIzaSyDuSjEGEKx5FnWYnQq8f_owbpYRBRrl5x0",
@@ -9,11 +9,6 @@
         appId: "1:353969651290:web:41e3aaf8e54c743702a263"
     };
 
-    // ═══════════════════════════════════════════════════════════
-    //  PASSWORD GATE — items never touch DOM until authenticated
-    // ═══════════════════════════════════════════════════════════
-
-    // --- SHA-256 via Web Crypto ---------------------------------------------------
     async function sha256(text) {
         const buf = new TextEncoder().encode(text);
         const hash = await crypto.subtle.digest("SHA-256", buf);
@@ -22,7 +17,6 @@
             .join("");
     }
 
-    // --- Lock-screen HTML (only thing in DOM before auth) -------------------------
     function showLock(container) {
         container.innerHTML = `
             <div class="bl-lock">
@@ -37,7 +31,6 @@
         `;
     }
 
-    // --- Build the real panel + attach Firestore after auth -----------------------
     function unlock(container, db, hash) {
         container.innerHTML = `
             <div class="bl-panel">
@@ -50,7 +43,7 @@
         const listEl = document.getElementById("bl-list");
         if (!listEl) return;
 
-        // items live under bucketlist_data/<sha256(user:pass)>/items — the path IS the key
+        // the hash is the doc id, no hash no items
         db.collection("bucketlist_data").doc(hash).collection("items").onSnapshot(snap => {
             const items = [];
             snap.forEach(doc => {
@@ -92,10 +85,6 @@
             .replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
     }
 
-    // ═══════════════════════════════════════════════════════════
-    //  ENTRY
-    // ═══════════════════════════════════════════════════════════
-
     document.addEventListener("DOMContentLoaded", () => {
         const tab = document.getElementById("bucketlist");
         if (!tab) return;
@@ -103,16 +92,15 @@
         if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
         const db = firebase.firestore();
 
-        const container = tab;  // the <section> itself — nothing else exists inside it
+        const container = tab;
 
-        // --- Already authenticated this session? ---------------------------------
+        // already logged in this session
         const savedHash = sessionStorage.getItem("bl_hash");
         if (savedHash) {
             unlock(container, db, savedHash);
             return;
         }
 
-        // --- Show lock screen ----------------------------------------------------
         showLock(container);
 
         const userInput = document.getElementById("bl-user");
@@ -131,7 +119,7 @@
             submitBtn.disabled = true;
             errEl.textContent = "";
 
-            // hash = sha256("username:password") — both must match the Firestore doc ID
+            // sha256 of "user:pass" has to match a doc in bucketlist_auth
             const hash = await sha256(user + ":" + pass);
             try {
                 const doc = await db.collection("bucketlist_auth").doc(hash).get();
@@ -149,7 +137,6 @@
             submitBtn.disabled = false;
         }
 
-        // Enter in either field submits the form
         document.getElementById("bl-form").onsubmit = e => {
             e.preventDefault();
             tryUnlock();

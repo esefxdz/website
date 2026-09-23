@@ -6,11 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const bucketlistVideo = document.getElementById('bucketlist-background-video');
   const botVideo = document.getElementById('yuukabot-background-video');
 
-  // ── Map URL path → tab id ──────────────────────────────
   function pathToTab(path) {
     const slug = path.replace(/^\/+|\/+$/g, '') || 'about';
     const valid = ['about', 'gallery', 'bucketlist', 'yuukabot', 'calendar', 'services'];
-    // backward compat: old /ahmet links
+    // old links
     if (slug === 'ahmet') return 'bucketlist';
     return valid.includes(slug) ? slug : 'about';
   }
@@ -19,10 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return '/' + (tabId === 'about' ? '' : tabId);
   }
 
-  // ── Swap background videos + top-bar theme ────────────
   const topLine = document.getElementById('top-line');
 
-  // map tab id → its dedicated video element (unlisted = use main)
+  // tabs not listed here use the main video
   const tabVideos = {
     calendar: calVideo,
     bucketlist: bucketlistVideo,
@@ -31,12 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function setBgForTab(tabId) {
-    // Hide + pause ALL videos first
     [mainVideo, calVideo, bucketlistVideo, botVideo].forEach(v => {
       if (v) { v.style.display = 'none'; v.pause(); }
     });
 
-    // Show the right one
     const target = tabVideos[tabId];
     if (target) {
       target.style.display = 'block';
@@ -46,49 +42,74 @@ document.addEventListener('DOMContentLoaded', () => {
       if (mainVideo.paused) mainVideo.play().catch(() => {});
     }
 
-    // Top-bar theme toggle
     if (topLine) {
       topLine.classList.toggle('cal-theme', tabId === 'calendar');
       topLine.classList.toggle('bucketlist-theme', tabId === 'bucketlist');
     }
   }
 
-  // ── Show a specific tab ────────────────────────────────
+  const navCurrent = document.getElementById('nav-current');
+
   function showTab(tabId) {
     tabs.forEach(t => t.style.display = 'none');
     const target = document.getElementById(tabId);
     if (target) target.style.display = 'block';
     setBgForTab(tabId);
+
+    // tab name next to the hamburger on mobile
+    const btn = document.getElementById(tabId + '-btn');
+    if (navCurrent && btn) navCurrent.textContent = btn.textContent;
   }
 
+  // changing the url breaks every button when index.html is opened as a file
   function setUrl(method, tabId) {
     if (window.location.protocol === 'file:') return;
     history[method]({ tab: tabId }, '', tabToPath(tabId) + window.location.search);
   }
 
-  // ── Navigate to a tab (updates URL + shows it) ────────
   function navigateTo(tabId) {
     showTab(tabId);
     window.scrollTo(0, 0);
     setUrl('pushState', tabId);
   }
 
-  // ── Initial load: show tab from URL ────────────────────
-  // (also normalises unknown / legacy paths like /ahmet in the address bar)
   const initialTab = pathToTab(window.location.pathname);
   showTab(initialTab);
   setUrl('replaceState', initialTab);
 
-  // ── Tab button clicks ──────────────────────────────────
-  const buttons = document.querySelectorAll('#top-line button');
+  const buttons = document.querySelectorAll('#nav-tabs button');
   buttons.forEach(button => {
     button.addEventListener('click', () => {
       const targetId = button.id.replace('-btn', '');
       navigateTo(targetId);
+      closeMenu();
     });
   });
 
-  // ── Back / forward browser buttons ─────────────────────
+  // hamburger menu (mobile)
+  const hamburger = document.getElementById('nav-hamburger');
+
+  function openMenu() {
+    topLine.classList.add('nav-open');
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    topLine.classList.remove('nav-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  hamburger.addEventListener('click', () => {
+    topLine.classList.contains('nav-open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', (e) => {
+    if (!topLine.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // back/forward buttons
   window.addEventListener('popstate', (e) => {
     showTab(e.state && e.state.tab ? e.state.tab : pathToTab(window.location.pathname));
   });

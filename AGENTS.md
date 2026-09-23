@@ -53,6 +53,7 @@ There are **no automated tests** in this project.
 ## Coding Style & Naming Conventions
 
 - **HTML:** Semantic elements where practical. Tab contents use `<section id="…" class="tab-content">`. IDs are kebab-case.
+- **Responsive:** modelled on userevolt.app. `styles.css` owns the breakpoints: ≤1300px tightens the nav buttons, ≤900px switches to a 56px bar with a hamburger dropdown (`#nav-hamburger`, `.nav-open` on `#top-line`, handled in `tabs.js`). Each tab stylesheet ends with its own `@media (max-width: 900px)` block (top offsets drop from ~120px to ~72px there). Tab buttons live in `#nav-tabs`, so style them as `#nav-tabs button`.
 - **CSS:** Each tab has its own stylesheet under `style/`. Class names follow BEM-lite (`cal-day`, `dash-card`). CSS variables define layout knobs (`--dash-columns`, `--dash-gap`).
 - **JavaScript:** Vanilla ES6+, no transpilation. Functions are `camelCase`, DOM-referencing IDs match kebab-case HTML IDs. Each script is self-contained with a `DOMContentLoaded` guard, and Firestore-backed scripts are wrapped in an IIFE so their helpers don't leak into (and clobber each other in) the global scope. Firebase config is repeated per-file (same values) — keep this pattern.
 - **Whitespace:** 4-space indentation in JS/CSS, 2-space in HTML. No trailing semicolons are required but consistency within each file is expected.

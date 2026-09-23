@@ -1,8 +1,4 @@
-/* ═══════════════════════════════════════════════════════════
-   STEAM PROFILE COMMENT STYLE
-   ═══════════════════════════════════════════════════════════ */
-
-/* ── About hero (top half) ──────────────────────────────── */
+/* about hero */
 #about-hero {
     padding: 120px 20px 50px;
     display: flex;
@@ -59,7 +55,7 @@
     letter-spacing: 1px;
 }
 
-/* ── Steam panel wrapper ─────────────────────────────────── */
+/* steam panel wrapper */
 #comments-section {
     width: 100%;
     max-width: 100%;
@@ -71,7 +67,7 @@
     text-align: left;
 }
 
-/* ── Panel header bar ────────────────────────────────────── */
+/* panel header bar */
 .steam-header {
     display: flex;
     align-items: center;
@@ -97,7 +93,7 @@
     margin: 0;
 }
 
-/* ── Comment rows ────────────────────────────────────────── */
+/* comment rows */
 #comments-list {
     display: flex;
     flex-direction: column;
@@ -157,7 +153,6 @@
     flex-wrap: wrap;
 }
 
-/* Username */
 .comment-name {
     font-size: 0.85rem;
     font-weight: bold;
@@ -174,7 +169,6 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Comment text */
 .comment-text {
     color: #000000 !important;
     font-size: 0.85rem !important;
@@ -197,7 +191,7 @@
     font-style: italic;
 }
 
-/* ── Post form (above the feed) ──────────────────────────── */
+/* post form */
 .steam-form-area {
     background: transparent;
     margin: 20px 0;
@@ -214,7 +208,7 @@
     letter-spacing: 1px;
 }
 
-/* ── Avatar colour picker ────────────────────────────────── */
+/* avatar colour picker */
 #avatar-picker {
     display: flex;
     align-items: center;
@@ -256,7 +250,7 @@
     transform: scale(1.25);
 }
 
-/* ── Form inputs ─────────────────────────────────────────── */
+/* form inputs */
 #comment-form input[type="text"],
 #comment-form textarea {
     width: 100%;
@@ -324,7 +318,7 @@
 }
 #comment-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
 
-/* ── Custom PFP Upload ───────────────────────────────────── */
+/* custom pfp upload */
 .custom-pfp-upload {
     display: flex;
     align-items: center;
@@ -380,7 +374,7 @@
     color: #ff7070;
 }
 
-/* ── Pagination ──────────────────────────────────────────── */
+/* pagination */
 .steam-pagination {
     display: flex;
     justify-content: center;
@@ -411,4 +405,31 @@
     border-color: #00c0d8;
     color: #000;
     font-weight: bold;
+}
+
+/* smaller screens: clicker goes next to the text instead of covering it */
+@media (max-width: 1300px) {
+    #click-counter-container { position: static; }
+    #about-hero { gap: 48px; }
+}
+
+/* mobile */
+@media (max-width: 900px) {
+    #about-hero {
+        flex-direction: column;
+        gap: 24px;
+        padding: 80px 8px 20px;
+    }
+    #click-counter-container {
+        position: static;
+    }
+    #yuuka-click-btn { width: 150px; }
+    .hero-text { text-align: center; }
+
+    #comments-section {
+        margin-top: 20px;
+        padding: 0 4px 30px;
+    }
+    /* bigger tap targets for the colour swatches */
+    .av-opt { width: 26px; height: 26px; }
 }

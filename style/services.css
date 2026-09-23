@@ -1,10 +1,6 @@
-/* ═══════════════════════════════════════════════════════════
-   SERVICES TAB — one banner per service, Bot Status look
-   Add a service by copying a .svc-banner block in index.html and
-   setting its --brand color (used for the left stripe only).
-   ═══════════════════════════════════════════════════════════ */
+/* to add a service copy a .svc-banner in index.html, --brand is the stripe color */
 
-/* ── Tab header (matches .dash-header) ────────────────────── */
+/* tab header */
 .svc-header {
     padding: 120px 20px 30px;
     text-align: center;
@@ -16,7 +12,7 @@
     text-shadow: 0 0 30px rgba(91, 111, 222, 0.5);
 }
 
-/* ── Banner list ──────────────────────────────────────────── */
+/* banner list */
 .svc-list {
     display: flex;
     flex-direction: column;
@@ -24,7 +20,7 @@
     padding: 0 48px 60px;
 }
 
-/* ── Banner (same glass as .dash-card) ────────────────────── */
+/* banner */
 .svc-banner {
     --brand: #5b6fde;
     display: flex;
@@ -61,7 +57,7 @@
     color: #fff;
 }
 
-/* overrides the global p rule in styles.css */
+/* global p is huge */
 .svc-banner .svc-desc {
     max-width: none;
     margin: 0;
@@ -89,4 +85,23 @@
 .svc-btn:focus-visible {
     outline: 2px solid #fff;
     outline-offset: 3px;
+}
+
+/* mobile */
+@media (max-width: 900px) {
+    .svc-header { padding: 72px 12px 20px; }
+    .svc-header h1 { font-size: 2rem; }
+    .svc-list { padding: 0 4px 30px; gap: 12px; }
+    .svc-banner {
+        flex-wrap: wrap;
+        gap: 16px;
+        padding: 20px;
+    }
+    .svc-logo { width: 52px; height: 52px; }
+    .svc-name { font-size: 1.3rem; }
+    .svc-btn {
+        flex-basis: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
 }

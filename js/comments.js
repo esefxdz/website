@@ -1,4 +1,4 @@
-// About tab — Steam-style comment wall + global click counter
+// comment wall + click counter on the about tab
 (() => {
     const FIREBASE_CONFIG = {
         apiKey: "AIzaSyDuSjEGEKx5FnWYnQq8f_owbpYRBRrl5x0",
@@ -37,7 +37,7 @@
         if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
         const db = firebase.firestore();
 
-        // ── Avatar colour picker ─────────────────────────────────────
+        // avatar colour picker
         const colorOpts = document.querySelectorAll('.av-opt');
         colorOpts.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -47,7 +47,7 @@
             });
         });
 
-        // ── Custom PFP upload (center-cropped + shrunk to 64×64 JPEG) ─
+        // pfp upload, cropped to a 64x64 square
         pfpUpload.addEventListener('change', () => {
             const file = pfpUpload.files[0];
             if (!file) return;
@@ -84,7 +84,6 @@
             pfpClear.style.display = 'none';
         });
 
-        // ── Char counter ─────────────────────────────────────────────
         function updateCharCount() {
             const left = MAX_CHARS - msgInput.value.length;
             charCountEl.textContent = left;
@@ -93,7 +92,7 @@
         msgInput.addEventListener('input', updateCharCount);
         updateCharCount();
 
-        // ── Real-time feed + pagination ──────────────────────────────
+        // comments feed + pages
         let allComments = [];
         let currentPage = 1;
 
@@ -138,7 +137,7 @@
                 listEl.innerHTML = '<p class="no-comments">Could not load comments.</p>';
             });
 
-        // ── Global click counter ─────────────────────────────────────
+        // click counter
         const clickBtn = document.getElementById('yuuka-click-btn');
         const clickDisplay = document.getElementById('click-counter-display');
         const clickSound = new Audio('sounds/yuuka_click.mp3');
@@ -146,8 +145,6 @@
         if (clickBtn && clickDisplay) {
             const statsRef = db.collection('stats').doc('global_clicks');
 
-            // Firestore applies local writes to this listener instantly,
-            // so clicks show up immediately without a manual optimistic update.
             statsRef.onSnapshot(doc => {
                 const count = doc.exists ? doc.data().count : 0;
                 clickDisplay.textContent = (count || 0).toLocaleString();
@@ -157,7 +154,7 @@
             });
 
             clickBtn.addEventListener('click', () => {
-                clickSound.currentTime = 0; // restart so rapid clicks all play
+                clickSound.currentTime = 0; // so spam clicking plays every time
                 clickSound.play().catch(() => {});
 
                 statsRef.set({
@@ -166,7 +163,6 @@
             });
         }
 
-        // ── Submit ───────────────────────────────────────────────────
         form.addEventListener('submit', async e => {
             e.preventDefault();
 
@@ -199,12 +195,11 @@
         });
     });
 
-    // ── Build a single comment bubble (Steam layout) ─────────────────
     function buildBubble(data) {
         const div = document.createElement('div');
         div.className = 'comment-bubble';
 
-        // Pending server timestamps are null until the write lands
+        // timestamp is null for a sec right after posting
         const ts = data.timestamp ? data.timestamp.toDate() : new Date();
         const timeStr = ts.toLocaleDateString('en-US', {
             year: 'numeric', month: 'short', day: 'numeric',
@@ -235,10 +230,7 @@
         return div;
     }
 
-    // ── Helpers ──────────────────────────────────────────────────────
-
-    // Older comments were stored pre-escaped (< and > only), which made
-    // them render as literal "&lt;" once escaped again. Undo that here.
+    // old comments were saved already escaped, this stops them showing "&lt;"
     function legacyUnescape(str) {
         if (!str) return '';
         return String(str).replace(/&lt;/g, '<').replace(/&gt;/g, '>');

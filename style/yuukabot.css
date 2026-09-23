@@ -1,18 +1,12 @@
-/* ═══════════════════════════════════════════════════════════
-   YUUKA BOT DASHBOARD — live system stats
-   ═══════════════════════════════════════════════════════════ */
-
-/* ── LAYOUT: edit these to change the grid ────────────────── */
+/* grid settings */
 :root {
-    --dash-columns: 6;            /* number of columns (2 = 2×2, 3 = 3-wide, etc.) */
-    --dash-gap: 20px;             /* space between boxes */
-    --dash-min-card-height: 200px;/* minimum height of each box */
-    --dash-max-width: none;       /* max width of the whole grid */
+    --dash-columns: 6;
+    --dash-gap: 20px;
+    --dash-min-card-height: 200px;
+    --dash-max-width: none;
 }
 
-/* Card widths come from the .spanN helpers at the bottom of this file. */
-
-/* ── Tab header ───────────────────────────────────────────── */
+/* tab header */
 .dash-header {
     padding: 120px 20px 30px;
     text-align: center;
@@ -39,7 +33,7 @@
 .dash-header .offline { background: #ef4444; box-shadow: 0 0 12px #ef4444; animation: none; }
 .dash-header .pending { background: #64748b; box-shadow: none; animation: none; }
 
-/* ── Card grid ────────────────────────────────────────────── */
+/* card grid */
 .dash-grid {
     display: grid;
     grid-template-columns: repeat(var(--dash-columns), 1fr);
@@ -49,7 +43,7 @@
     padding: 0 48px 60px;
 }
 
-/* ── Glass card ───────────────────────────────────────────── */
+/* glass card */
 .dash-card {
     background: rgba(15, 15, 35, 0.55);
     backdrop-filter: blur(16px);
@@ -68,7 +62,7 @@
     box-shadow: 0 6px 28px rgba(91, 111, 222, 0.12);
 }
 
-/* ── Card header ──────────────────────────────────────────── */
+/* card header */
 .card-top {
     display: flex;
     align-items: center;
@@ -82,7 +76,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ── Card value ───────────────────────────────────────────── */
+/* card value */
 .card-value {
     font-size: 3rem;
     font-weight: bold;
@@ -96,7 +90,7 @@
     font-weight: 400;
 }
 
-/* ── Progress bar (CPU / RAM / Disk) ──────────────────────── */
+/* progress bar */
 .card-bar-wrap {
     width: 100%;
     height: 8px;
@@ -115,7 +109,7 @@
 .card-bar-fill.disk { background: linear-gradient(90deg, #34d399, #6ee7b7); }
 .card-bar-fill.swap { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
 
-/* ── Detail text (used / total) ───────────────────────────── */
+/* detail text */
 .card-detail {
     font-size: 0.78rem;
     color: rgba(255, 255, 255, 0.3);
@@ -123,7 +117,7 @@
     margin-top: 6px;
 }
 
-/* ── Fastfetch text block ──────────────────────────────────── */
+/* fastfetch text block */
 .card-fetch {
     margin: 12px 0 0;
     font-family: "Cascadia Code", "Fira Code", "JetBrains Mono", Consolas, monospace;
@@ -134,7 +128,28 @@
     overflow: hidden;
 }
 
-/* ── Span helpers (6-col grid) ──────────────────────────────── */
+/* card widths */
 .dash-card.span2 { grid-column: span 2; }  /* 3 per row */
-.dash-card.span3 { grid-column: span 3; }  /* 2 per row — stretched */
+.dash-card.span3 { grid-column: span 3; }  /* 2 per row */
 .dash-card.span6 { grid-column: span 6; }  /* full width */
+
+/* mobile */
+/* 2 columns on tablets, 1 on phones */
+@media (max-width: 900px) {
+    :root {
+        --dash-columns: 2;
+        --dash-gap: 12px;
+        --dash-min-card-height: 130px;
+    }
+    .dash-header { padding: 72px 12px 20px; }
+    .dash-header h1 { font-size: 2rem; }
+    .dash-grid { padding: 0 4px 30px; }
+    .dash-card { padding: 20px; }
+    .dash-card.span2,
+    .dash-card.span3 { grid-column: span 1; }
+    .dash-card.span6 { grid-column: 1 / -1; }
+    .card-value { font-size: 2.2rem; }
+}
+@media (max-width: 575px) {
+    :root { --dash-columns: 1; }
+}
