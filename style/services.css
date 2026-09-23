@@ -1,0 +1,92 @@
+/* ═══════════════════════════════════════════════════════════
+   SERVICES TAB — one banner per service, Bot Status look
+   Add a service by copying a .svc-banner block in index.html and
+   setting its --brand color (used for the left stripe only).
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Tab header (matches .dash-header) ────────────────────── */
+.svc-header {
+    padding: 120px 20px 30px;
+    text-align: center;
+}
+.svc-header h1 {
+    font-size: 2.8rem;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 0 30px rgba(91, 111, 222, 0.5);
+}
+
+/* ── Banner list ──────────────────────────────────────────── */
+.svc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 48px 60px;
+}
+
+/* ── Banner (same glass as .dash-card) ────────────────────── */
+.svc-banner {
+    --brand: #5b6fde;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 28px 32px;
+    background: rgba(15, 15, 35, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(91, 111, 222, 0.2);
+    border-left: 4px solid var(--brand);
+    border-radius: 16px;
+    text-align: left;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.svc-banner:hover {
+    border-color: rgba(91, 111, 222, 0.5);
+    border-left-color: var(--brand);
+    box-shadow: 0 6px 28px rgba(91, 111, 222, 0.12);
+}
+
+.svc-logo {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 14px;
+}
+
+.svc-info { flex: 1; min-width: 0; }
+
+.svc-name {
+    margin: 0 0 6px;
+    font-size: 1.6rem;
+    color: #fff;
+}
+
+/* overrides the global p rule in styles.css */
+.svc-banner .svc-desc {
+    max-width: none;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.svc-btn {
+    flex-shrink: 0;
+    padding: 12px 24px;
+    border-radius: 10px;
+    background: #5b6fde;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.svc-btn:hover {
+    background: #6d80ee;
+    box-shadow: 0 0 18px rgba(91, 111, 222, 0.5);
+}
+.svc-btn:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}

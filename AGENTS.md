@@ -4,7 +4,7 @@
 
 ```
 website/
-├── index.html              # Single-page entry point — all 5 tabs live here
+├── index.html              # Single-page entry point — all 6 tabs live here
 ├── _redirects              # Netlify SPA rewrite rule (/* → /index.html)
 ├── js/
 │   ├── tabs.js             # Client-side routing, tab switching, background video swap
@@ -19,9 +19,10 @@ website/
 │   ├── yuukabot.css        # Dashboard glassmorphism cards + grid
 │   ├── calendar.css        # Calendar grid, popups, sidebar
 │   ├── bucketlist.css      # Lock screen + list panel
+│   ├── services.css        # Services tab — one .svc-banner per service (Bot Status look)
 │   └── gallery.css         # Gallery grid + lightbox
 ├── gallery/                # Full-quality images, thumbnails/, and manifest.json
-├── textures/               # Background MP4 videos + clickable character PNG
+├── textures/               # Background MP4s, clickable character PNG, service logos
 ├── sounds/                 # Click SFX (yuuka_click.mp3)
 ├── generate_thumbnails.py  # Pillow script: builds thumbnails/ + manifest.json
 └── firebase.txt            # Firestore security rules (reference only, gitignored)
@@ -44,7 +45,8 @@ npx serve .
 ```
 
 - `_redirects` handles SPA routing on Netlify; for local dev, navigate to `/index.html` directly.
-- After adding images to `gallery/`, run `python generate_thumbnails.py` (requires `Pillow`). It creates missing thumbnails and rewrites `gallery/manifest.json`, which is the list the gallery renders — an image not in the manifest won't show up.
+- After adding images to `gallery/`, run `python generate_thumbnails.py` (requires `Pillow`, and `ffmpeg` for GIFs). It converts animated GIFs to much smaller MP4s, creates missing thumbnails, and rewrites `gallery/manifest.json`, which is the list the gallery renders — an image not in the manifest won't show up.
+- **Keep data usage low.** Background videos are 1080p H.264, no audio, `+faststart`, `preload="none"` (tabs.js starts the one the current tab needs). Recent ones use `ffmpeg -i in.mp4 -r 30 -c:v libx264 -preset slow -crf 28 -pix_fmt yuv420p -an -movflags +faststart out.mp4`. Keep untouched originals outside the site folder (`../media_originals/`). Size images to about 2× their displayed size.
 
 There are **no automated tests** in this project.
 
@@ -83,7 +85,7 @@ Examples from the repo: `calendar added`, `fix upcoming filter`, `css polish bs`
 
 1. Add the new `<section class="tab-content" id="…">` in `index.html`.
 2. Add a `<button id="…-btn">` to the nav bar (`#top-line`).
-3. Add the tab name to the `valid` array in `js/tabs.js`.
+3. Add the tab name to the `valid` array in `js/tabs.js`. For a custom background video, map the tab to a video element in `tabVideos` (tabs can share one) and optionally add a nav theme class.
 4. Create a dedicated stylesheet in `style/` and JS module in `js/` if needed.
 5. Link both in `index.html` `<head>` (CSS) and before `</body>` (JS).
 6. If the feature reads/writes Firestore, add the matching security rules to `firebase.txt`.

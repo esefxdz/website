@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Map URL path → tab id ──────────────────────────────
   function pathToTab(path) {
     const slug = path.replace(/^\/+|\/+$/g, '') || 'about';
-    const valid = ['about', 'gallery', 'bucketlist', 'yuukabot', 'calendar'];
+    const valid = ['about', 'gallery', 'bucketlist', 'yuukabot', 'calendar', 'services'];
     // backward compat: old /ahmet links
     if (slug === 'ahmet') return 'bucketlist';
     return valid.includes(slug) ? slug : 'about';
@@ -22,11 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Swap background videos + top-bar theme ────────────
   const topLine = document.getElementById('top-line');
 
-  // map tab id → its dedicated video element (null = use main)
+  // map tab id → its dedicated video element (unlisted = use main)
   const tabVideos = {
     calendar: calVideo,
     bucketlist: bucketlistVideo,
-    yuukabot: botVideo
+    yuukabot: botVideo,
+    services: botVideo
   };
 
   function setBgForTab(tabId) {
@@ -60,18 +61,23 @@ document.addEventListener('DOMContentLoaded', () => {
     setBgForTab(tabId);
   }
 
+  function setUrl(method, tabId) {
+    if (window.location.protocol === 'file:') return;
+    history[method]({ tab: tabId }, '', tabToPath(tabId) + window.location.search);
+  }
+
   // ── Navigate to a tab (updates URL + shows it) ────────
   function navigateTo(tabId) {
     showTab(tabId);
     window.scrollTo(0, 0);
-    history.pushState({ tab: tabId }, '', tabToPath(tabId));
+    setUrl('pushState', tabId);
   }
 
   // ── Initial load: show tab from URL ────────────────────
   // (also normalises unknown / legacy paths like /ahmet in the address bar)
   const initialTab = pathToTab(window.location.pathname);
   showTab(initialTab);
-  history.replaceState({ tab: initialTab }, '', tabToPath(initialTab) + window.location.search);
+  setUrl('replaceState', initialTab);
 
   // ── Tab button clicks ──────────────────────────────────
   const buttons = document.querySelectorAll('#top-line button');

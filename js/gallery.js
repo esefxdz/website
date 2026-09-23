@@ -4,22 +4,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('gallery-container');
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxVideo = document.getElementById('lightbox-video');
 
   if (!container || !lightbox) return;
 
+  // Animated GIFs are served as MP4 (a few % of the size), so those
+  // open in the <video>; everything else in the <img>.
   const openLightbox = (src) => {
-    lightboxImg.src = src;
+    const isVideo = src.endsWith('.mp4');
+    lightboxImg.style.display = isVideo ? 'none' : 'block';
+    lightboxVideo.style.display = isVideo ? 'block' : 'none';
+    if (isVideo) {
+      lightboxVideo.src = src;
+      lightboxVideo.play().catch(() => {});
+    } else {
+      lightboxImg.src = src;
+    }
     lightbox.style.display = 'block';
   };
 
   const closeLightbox = () => {
     lightbox.style.display = 'none';
-    lightboxImg.src = ''; // Clear source to stop GIFs
+    lightboxImg.removeAttribute('src');
+    // Stop playback and any download still in progress
+    lightboxVideo.pause();
+    lightboxVideo.removeAttribute('src');
+    lightboxVideo.load();
   };
 
-  // Close on the X, on a click outside the image, or with Escape
+  // Close on the X, on a click outside the media, or with Escape
   lightbox.addEventListener('click', (e) => {
-    if (e.target !== lightboxImg) closeLightbox();
+    if (e.target !== lightboxImg && e.target !== lightboxVideo) closeLightbox();
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && lightbox.style.display === 'block') closeLightbox();

@@ -9,12 +9,13 @@
   <link rel="stylesheet" href="style/yuukabot.css">
   <link rel="stylesheet" href="style/calendar.css">
   <link rel="stylesheet" href="style/bucketlist.css">
+  <link rel="stylesheet" href="style/services.css">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <title>Esef</title>
 </head>
 
 <body>
-  <video autoplay muted loop id="background-video">
+  <video muted loop playsinline preload="none" id="background-video">
     <source src="textures/Yuuka_body.mp4" type="video/mp4">
   </video>
   <video muted loop playsinline preload="none" id="calendar-background-video" style="display:none">
@@ -32,6 +33,7 @@
     <button id="bucketlist-btn">Bucketlist</button>
     <button id="yuukabot-btn">Bot Status</button>
     <button id="calendar-btn">Calendar</button>
+    <button id="services-btn">Services</button>
   </div>
 
   <section id="about" class="tab-content">
@@ -39,7 +41,7 @@
     <!-- Top half: welcome -->
     <div id="about-hero">
       <div id="click-counter-container">
-        <img src="textures/yuuka_click.png" id="yuuka-click-btn" alt="Click Me!">
+        <img src="textures/yuuka_click.webp" id="yuuka-click-btn" alt="Click Me!">
         <div id="click-counter-display">...</div>
         <div id="click-counter-label">click me</div>
       </div>
@@ -205,10 +207,29 @@
     </div>
   </section>
 
+  <section id="services" class="tab-content">
+    <header class="svc-header">
+      <h1>Services</h1>
+    </header>
+
+    <div class="svc-list">
+      <!-- One banner per service — copy this block to add another -->
+      <article class="svc-banner" style="--brand: #FFD600">
+        <img class="svc-logo" src="textures/revolt_logo.png" alt="">
+        <div class="svc-info">
+          <h2 class="svc-name">ReVoltVPN</h2>
+          <p class="svc-desc">Free, open-source VPN for Android. No sign-up, no logs.</p>
+        </div>
+        <a class="svc-btn" href="https://userevolt.app" target="_blank" rel="noopener">Visit &rarr;</a>
+      </article>
+    </div>
+  </section>
+
   <!-- Lightbox (gallery) -->
   <div id="lightbox" class="lightbox">
     <span class="lightbox-close">&times;</span>
     <img class="lightbox-content" id="lightbox-img" alt="">
+    <video class="lightbox-content" id="lightbox-video" muted loop playsinline></video>
   </div>
 
   <script src="js/gallery.js" defer></script>
