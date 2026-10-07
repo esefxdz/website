@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" shape-rendering="crispEdges">
+  <rect width="64" height="64" fill="#c4b550"/>
+  <path d="M0 0H64V3H3V64H0Z" fill="#e6da8a"/>
+  <path d="M64 64H0V61H61V0H64Z" fill="#6f6620"/>
+  <path d="M14 10h5v5h-5ZM19 10h5v5h-5ZM39 10h5v5h-5ZM44 10h5v5h-5ZM14 15h5v5h-5ZM19 15h5v5h-5ZM34 15h5v5h-5ZM39 15h5v5h-5ZM14 20h5v5h-5ZM19 20h5v5h-5ZM29 20h5v5h-5ZM34 20h5v5h-5ZM14 25h5v5h-5ZM19 25h5v5h-5ZM24 25h5v5h-5ZM29 25h5v5h-5ZM14 30h5v5h-5ZM19 30h5v5h-5ZM24 30h5v5h-5ZM14 35h5v5h-5ZM19 35h5v5h-5ZM24 35h5v5h-5ZM29 35h5v5h-5ZM14 40h5v5h-5ZM19 40h5v5h-5ZM29 40h5v5h-5ZM34 40h5v5h-5ZM14 45h5v5h-5ZM19 45h5v5h-5ZM34 45h5v5h-5ZM39 45h5v5h-5ZM14 50h5v5h-5ZM19 50h5v5h-5ZM39 50h5v5h-5ZM44 50h5v5h-5Z" fill="#2b3125"/>
+</svg>
