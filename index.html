@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style/styles.css">
   <link rel="stylesheet" href="style/gallery.css">
   <link rel="stylesheet" href="style/comments.css">
-  <link rel="stylesheet" href="style/yuukabot.css">
   <link rel="stylesheet" href="style/calendar.css">
   <link rel="stylesheet" href="style/bucketlist.css">
   <link rel="stylesheet" href="style/services.css">
@@ -34,7 +33,7 @@
       <button id="about-btn">About This Website</button>
       <button id="gallery-btn">Gallery</button>
       <button id="bucketlist-btn">Bucketlist</button>
-      <button id="yuukabot-btn">Bot Status</button>
+      <button id="status-btn">Status</button>
       <button id="calendar-btn">Calendar</button>
       <button id="services-btn">Services</button>
     </nav>
@@ -117,71 +116,9 @@
 
   <section id="bucketlist" class="tab-content"></section>
 
-  <section id="yuukabot" class="tab-content">
-    <header class="dash-header">
-      <h1><span class="status-dot pending" id="dash-status-dot"></span>Yuuka Bot</h1>
-    </header>
-
-    <div class="dash-grid">
-      <div class="dash-card span2">
-        <div class="card-top"><span class="card-label">Uptime</span></div>
-        <p class="card-value" id="dash-uptime">—</p>
-        <span class="card-detail" id="dash-bot-uptime"></span>
-      </div>
-      <div class="dash-card span2">
-        <div class="card-top"><span class="card-label">Disk</span></div>
-        <p class="card-value" id="dash-disk-val">—</p>
-        <div class="card-bar-wrap">
-          <div class="card-bar-fill disk" id="dash-disk-bar" style="width:0%"></div>
-        </div>
-        <span class="card-detail" id="dash-disk-detail"></span>
-      </div>
-      <div class="dash-card span2">
-        <div class="card-top"><span class="card-label">Load Average</span></div>
-        <p class="card-value" id="dash-load">—</p>
-        <span class="card-detail">1m / 5m / 15m</span>
-      </div>
-
-      <div class="dash-card span2">
-        <div class="card-top"><span class="card-label">Network</span></div>
-        <p class="card-value" id="dash-net">—</p>
-        <span class="card-detail" id="dash-net-detail"></span>
-      </div>
-      <div class="dash-card span2">
-        <div class="card-top"><span class="card-label">Processes</span></div>
-        <p class="card-value" id="dash-procs">—</p>
-        <span class="card-detail">running</span>
-      </div>
-      <div class="dash-card span2">
-        <div class="card-top"><span class="card-label">Swap</span></div>
-        <p class="card-value" id="dash-swap-val">—</p>
-        <div class="card-bar-wrap">
-          <div class="card-bar-fill swap" id="dash-swap-bar" style="width:0%"></div>
-        </div>
-        <span class="card-detail" id="dash-swap-detail"></span>
-      </div>
-
-      <div class="dash-card span3">
-        <div class="card-top"><span class="card-label">CPU</span></div>
-        <p class="card-value" id="dash-cpu-val">—</p>
-        <div class="card-bar-wrap">
-          <div class="card-bar-fill cpu" id="dash-cpu-bar" style="width:0%"></div>
-        </div>
-      </div>
-      <div class="dash-card span3">
-        <div class="card-top"><span class="card-label">Memory</span></div>
-        <p class="card-value" id="dash-ram-val">—</p>
-        <div class="card-bar-wrap">
-          <div class="card-bar-fill ram" id="dash-ram-bar" style="width:0%"></div>
-        </div>
-        <span class="card-detail" id="dash-ram-detail"></span>
-      </div>
-
-      <div class="dash-card span6">
-        <div class="card-top"><span class="card-label">System Info</span></div>
-        <pre class="card-fetch" id="dash-fetch">—</pre>
-      </div>
-    </div>
+  <!-- VEGA status page (status.userevolt.app), src is set by tabs.js on first open -->
+  <section id="status" class="tab-content">
+    <iframe id="status-frame" title="yuuka status"></iframe>
   </section>
 
   <section id="calendar" class="tab-content">
@@ -252,7 +189,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="js/comments.js"></script>
-  <script src="js/yuukabot.js"></script>
   <script src="js/calendar.js"></script>
   <script src="js/bucketlist.js"></script>
 </body>

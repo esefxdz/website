@@ -91,6 +91,19 @@ html, body {
     transition: border-color 0.4s ease, color 0.4s ease;
 }
 
+/* status theme (VEGA colours) */
+#top-line.status-theme {
+    background-color: #03070b;
+    border-bottom: 1px solid rgba(75, 187, 232, .28);
+}
+#top-line.status-theme #nav-tabs button {
+    border-bottom-color: #4bbbe8;
+    border-left-color: #4bbbe8;
+    border-right-color: #4bbbe8;
+    color: #a6e4ff;
+    transition: border-color 0.4s ease, color 0.4s ease;
+}
+
 h1 {
     font-size: 3rem;
     color: #000000;
@@ -186,7 +199,8 @@ img {
 
     #nav-tabs button,
     #top-line.cal-theme #nav-tabs button,
-    #top-line.bucketlist-theme #nav-tabs button {
+    #top-line.bucketlist-theme #nav-tabs button,
+    #top-line.status-theme #nav-tabs button {
         width: 100%;
         margin: 0;
         padding: 12px 24px;
@@ -205,6 +219,7 @@ img {
     }
     #top-line.cal-theme #nav-tabs button:hover { border-left-color: #FBC4CC; }
     #top-line.bucketlist-theme #nav-tabs button:hover { border-left-color: #B84457; }
+    #top-line.status-theme #nav-tabs button:hover { border-left-color: #4bbbe8; }
 
     /* keep the video centered on tall screens */
     #background-video,
@@ -220,4 +235,23 @@ img {
 
     h1 { font-size: 2.2rem; }
     p  { font-size: 1.2rem; }
+}
+
+/* status tab: VEGA page fills everything under the top line */
+#status { padding: 0; }
+#status-frame {
+    position: fixed;
+    top: 115px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 115px);
+    border: 0;
+    background: #05080c;
+}
+
+@media (max-width: 900px) {
+    #status-frame {
+        top: 56px;
+        height: calc(100% - 56px);
+    }
 }

@@ -8,9 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function pathToTab(path) {
     const slug = path.replace(/^\/+|\/+$/g, '') || 'about';
-    const valid = ['about', 'gallery', 'bucketlist', 'yuukabot', 'calendar', 'services'];
+    const valid = ['about', 'gallery', 'bucketlist', 'status', 'calendar', 'services'];
     // old links
     if (slug === 'ahmet') return 'bucketlist';
+    if (slug === 'yuukabot') return 'status';
     return valid.includes(slug) ? slug : 'about';
   }
 
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabVideos = {
     calendar: calVideo,
     bucketlist: bucketlistVideo,
-    yuukabot: botVideo,
+    status: botVideo,
     services: botVideo
   };
 
@@ -45,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (topLine) {
       topLine.classList.toggle('cal-theme', tabId === 'calendar');
       topLine.classList.toggle('bucketlist-theme', tabId === 'bucketlist');
+      topLine.classList.toggle('status-theme', tabId === 'status');
     }
   }
 
@@ -55,6 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const target = document.getElementById(tabId);
     if (target) target.style.display = 'block';
     setBgForTab(tabId);
+
+    // VEGA polls every 2s, so only load it once someone opens the tab
+    const statusFrame = document.getElementById('status-frame');
+    if (tabId === 'status' && statusFrame && !statusFrame.src) {
+      statusFrame.src = 'https://status.userevolt.app/';
+    }
 
     // tab name next to the hamburger on mobile
     const btn = document.getElementById(tabId + '-btn');
