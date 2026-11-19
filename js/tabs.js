@@ -29,16 +29,27 @@ document.addEventListener('DOMContentLoaded', () => {
     services: botVideo
   };
 
+  // still frame shown while the video downloads, only fetched for the tab you're on
+  function showPoster(v) {
+    if (!v.poster && v.dataset.poster) v.poster = v.dataset.poster;
+  }
+
   function setBgForTab(tabId) {
     [mainVideo, calVideo, bucketlistVideo, botVideo].forEach(v => {
       if (v) { v.style.display = 'none'; v.pause(); }
     });
 
+    // the bucketlist lock screen is solid black, so don't download its video until it's unlocked
+    const locked = tabId === 'bucketlist' && document.querySelector('#bucketlist .bl-lock');
     const target = tabVideos[tabId];
-    if (target) {
+    if (locked) {
+      // nothing to show behind the lock
+    } else if (target) {
+      showPoster(target);
       target.style.display = 'block';
       target.play().catch(() => {});
     } else if (mainVideo) {
+      showPoster(mainVideo);
       mainVideo.style.display = 'block';
       if (mainVideo.paused) mainVideo.play().catch(() => {});
     }
@@ -115,6 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu();
+  });
+
+  window.addEventListener('bucketlist-unlocked', () => {
+    if (document.getElementById('bucketlist').style.display === 'block') setBgForTab('bucketlist');
   });
 
   // back/forward buttons

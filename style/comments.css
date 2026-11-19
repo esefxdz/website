@@ -46,7 +46,7 @@
 }
 
 #click-counter-label {
-    color: #556772;
+    color: #46566a;
     font-size: 0.9rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -60,9 +60,13 @@
     width: 100%;
     max-width: 100%;
     margin: 50px 0 0 0;
-    padding: 0 20px 40px 20px;
+    padding: 4px 20px 30px 20px;
     box-sizing: border-box;
-    background: transparent;
+    /* soft frosted backing so text stays readable over the bright video */
+    background: rgba(255, 255, 255, 0.42);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 8px;
     font-family: 'Motiva Sans', Arial, Helvetica, sans-serif;
     text-align: left;
 }
@@ -74,20 +78,20 @@
     gap: 8px;
     padding: 10px 0;
     background: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .steam-header-title {
     font-size: 0.72rem;
     font-weight: 700;
-    color: #8b98a0;
+    color: #33434f;
     letter-spacing: 1px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 #comments-title {
     font-size: 0.72rem;
-    color: #556772;
+    color: #46566a;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: normal;
     margin: 0;
@@ -104,14 +108,14 @@
     gap: 0;
     align-items: flex-start;
     background: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
     padding: 14px 0;
     transition: background 0.15s;
     animation: fadeRow 0.2s ease forwards;
 }
 
 .comment-bubble:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .comment-bubble:last-child {
@@ -163,7 +167,7 @@
 
 .comment-time {
     font-size: 0.72rem;
-    color: #556772;
+    color: #46566a;
     margin-left: auto;
     white-space: nowrap;
     font-family: Arial, Helvetica, sans-serif;
@@ -198,7 +202,7 @@
 }
 
 .steam-form-label {
-    color: #8b98a0 !important;
+    color: #33434f !important;
     font-size: 0.75rem !important;
     margin: 0 0 8px 0 !important;
     max-width: 100% !important;
@@ -219,7 +223,7 @@
 
 .picker-label {
     font-size: 0.7rem;
-    color: #556772;
+    color: #46566a;
     font-family: Arial, Helvetica, sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -246,7 +250,8 @@
 .av-opt:hover { transform: scale(1.2); }
 
 .av-opt.selected {
-    border-color: #c6d4df;
+    border-color: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
     transform: scale(1.25);
 }
 
@@ -254,10 +259,10 @@
 #comment-form input[type="text"],
 #comment-form textarea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 2px;
-    color: #c6d4df;
+    color: #111;
     padding: 10px;
     font-size: 0.85rem;
     font-family: Arial, Helvetica, sans-serif;
@@ -269,7 +274,7 @@
 
 #comment-form input[type="text"]::placeholder,
 #comment-form textarea::placeholder {
-    color: #3d4b57;
+    color: #6b7882;
 }
 
 #comment-form input[type="text"]:focus,
@@ -290,7 +295,7 @@
 
 #char-count {
     font-size: 0.72rem;
-    color: #3d4b57;
+    color: #46566a;
     font-family: Arial, Helvetica, sans-serif;
     transition: color 0.2s;
 }
@@ -384,9 +389,9 @@
 }
 
 .steam-page-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #c6d4df;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #2c3a44;
     padding: 6px 12px;
     border-radius: 2px;
     font-size: 0.8rem;
@@ -396,8 +401,8 @@
 }
 
 .steam-page-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    background: rgba(255, 255, 255, 0.85);
+    color: #000;
 }
 
 .steam-page-btn.active {

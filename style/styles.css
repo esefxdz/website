@@ -92,8 +92,9 @@ html, body {
 }
 
 /* status theme (VEGA colours) */
+/* see-through like the other tabs, the bot video shows blurred behind it */
 #top-line.status-theme {
-    background-color: #03070b;
+    background-color: rgba(3, 7, 11, 0.55);
     border-bottom: 1px solid rgba(75, 187, 232, .28);
 }
 #top-line.status-theme #nav-tabs button {

@@ -22,6 +22,7 @@
             <div class="bl-lock">
                 <form class="bl-lock-box" id="bl-form">
                     <h2>Bucketlist</h2>
+                    <p class="bl-hint">private list, friends only 🔒</p>
                     <input type="text" id="bl-user" placeholder="Username" autocomplete="username">
                     <input type="password" id="bl-pass" placeholder="Password" autocomplete="current-password">
                     <button type="submit" id="bl-submit">Unlock</button>
@@ -42,6 +43,7 @@
 
         const listEl = document.getElementById("bl-list");
         if (!listEl) return;
+        window.dispatchEvent(new Event("bucketlist-unlocked"));
 
         // the hash is the doc id, no hash no items
         db.collection("bucketlist_data").doc(hash).collection("items").onSnapshot(snap => {

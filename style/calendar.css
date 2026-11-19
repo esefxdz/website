@@ -42,7 +42,11 @@
     border-radius: 6px; min-height: 85px; padding: 4px 6px;
     position: relative; transition: border-color 0.2s;
 }
-.cal-day.today { border-color: rgba(251,196,204,0.45); }
+.cal-day.today {
+    background: rgba(251,196,204,0.16);
+    border-color: rgba(251,196,204,0.7);
+}
+.cal-day.today .day-num { color: #FBC4CC; font-weight: bold; }
 .cal-day.other-month { opacity: 0.2; pointer-events: none; }
 .cal-day.has-events { cursor: pointer; }
 .cal-day.has-events:hover {
@@ -69,7 +73,8 @@
     z-index: 10; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
     pointer-events: none;
 }
-.cal-day:hover .cal-popup { display: block; }
+.cal-day:hover .cal-popup,
+.cal-day.open .cal-popup { display: block; }
 .cal-popup h4 {
     margin: 0 0 10px; font-size: 0.85rem; color: #FBC4CC;
     font-family: Arial, sans-serif;

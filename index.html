@@ -15,16 +15,16 @@
 </head>
 
 <body>
-  <video muted loop playsinline preload="none" id="background-video">
+  <video muted loop playsinline preload="none" data-poster="textures/Yuuka_body_poster.jpg" id="background-video">
     <source src="textures/Yuuka_body.mp4" type="video/mp4">
   </video>
-  <video muted loop playsinline preload="none" id="calendar-background-video" style="display:none">
+  <video muted loop playsinline preload="none" data-poster="textures/calendar_background_poster.jpg" id="calendar-background-video" style="display:none">
     <source src="textures/calendar_background.mp4" type="video/mp4">
   </video>
-  <video muted loop playsinline preload="none" id="bucketlist-background-video" style="display:none">
+  <video muted loop playsinline preload="none" data-poster="textures/cz_background_poster.jpg" id="bucketlist-background-video" style="display:none">
     <source src="textures/cz_background.mp4" type="video/mp4">
   </video>
-  <video muted loop playsinline preload="none" id="yuukabot-background-video" style="display:none">
+  <video muted loop playsinline preload="none" data-poster="textures/bot_background_poster.jpg" id="yuukabot-background-video" style="display:none">
     <source src="textures/bot_background.mp4" type="video/mp4">
   </video>
   <div id="top-line">
@@ -148,7 +148,7 @@
 
     <div class="svc-list">
       <!-- copy this to add another service -->
-      <article class="svc-banner" style="--brand: #FFD600">
+      <article class="svc-banner" style="--brand: #FFD600; --brand-ink: #1a1600">
         <img class="svc-logo" src="textures/revolt_logo.png" alt="">
         <div class="svc-info">
           <h2 class="svc-name">ReVoltVPN</h2>
@@ -156,26 +156,26 @@
         </div>
         <a class="svc-btn" href="https://userevolt.app" target="_blank" rel="noopener">Visit &rarr;</a>
       </article>
-      <article class="svc-banner" style="--brand: #c4b550">
-        <img class="svc-logo" src="textures/favicon2.svg" alt="">
+      <article class="svc-banner" style="--brand: #c4b550; --brand-ink: #1e2219" data-monitor="9">
+        <img class="svc-logo" src="textures/kaledonya_flag.svg" alt="">
         <div class="svc-info">
-          <h2 class="svc-name">Kaledonya clips</h2>
+          <h2 class="svc-name">Kaledonya clips<span class="svc-status" hidden></span></h2>
           <p class="svc-desc">Kaledonya video and other file sharing service.</p>
         </div>
         <a class="svc-btn" href="https://clips.userevolt.app" target="_blank" rel="noopener">Visit &rarr;</a>
       </article>
-      <article class="svc-banner" style="--brand: #c4b550">
-        <img class="svc-logo" src="textures/kaledongit_logo.svg" alt="">
+      <article class="svc-banner" style="--brand: #c0392b; --brand-ink: #fff" data-monitor="14">
+        <img class="svc-logo" src="textures/kaledonya_flag.svg" alt="">
         <div class="svc-info">
-          <h2 class="svc-name">KaledonGit</h2>
+          <h2 class="svc-name">KaledonGit<span class="svc-status" hidden></span></h2>
           <p class="svc-desc">A git of our own. Self-hosted Git server, public repos can be browsed without an account.</p>
         </div>
         <a class="svc-btn" href="https://git.userevolt.app" target="_blank" rel="noopener">Visit &rarr;</a>
       </article>
-      <article class="svc-banner" style="--brand: #4bbbe8">
+      <article class="svc-banner" style="--brand: #4bbbe8; --brand-ink: #04121a" data-monitor="vega">
         <img class="svc-logo" src="textures/vega_emblem.svg" alt="">
         <div class="svc-info">
-          <h2 class="svc-name">VEGA</h2>
+          <h2 class="svc-name">VEGA<span class="svc-status" hidden></span></h2>
           <p class="svc-desc">Uptime and status page for my home server.</p>
         </div>
         <a class="svc-btn" href="https://status.userevolt.app" target="_blank" rel="noopener">Visit &rarr;</a>
@@ -186,12 +186,16 @@
   <!-- gallery lightbox -->
   <div id="lightbox" class="lightbox">
     <span class="lightbox-close">&times;</span>
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous">&#8249;</button>
+    <button class="lightbox-nav lightbox-next" aria-label="Next">&#8250;</button>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
     <img class="lightbox-content" id="lightbox-img" alt="">
     <video class="lightbox-content" id="lightbox-video" muted loop playsinline></video>
   </div>
 
   <script src="js/gallery.js" defer></script>
   <script src="js/tabs.js" defer></script>
+  <script src="js/services.js" defer></script>
 
   <!-- firebase has to load before the scripts below -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>

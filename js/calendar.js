@@ -37,6 +37,17 @@
             gridEl.innerHTML = '<p class="cal-side-empty">Could not load.</p>';
         });
 
+        // phones have no hover: tap a day to open its events, tap anywhere else to close
+        gridEl.addEventListener("click", e => {
+            const day = e.target.closest(".cal-day.has-events");
+            const wasOpen = day && day.classList.contains("open");
+            gridEl.querySelectorAll(".cal-day.open").forEach(d => d.classList.remove("open"));
+            if (day && !wasOpen) day.classList.add("open");
+        });
+        document.addEventListener("click", e => {
+            if (!gridEl.contains(e.target)) gridEl.querySelectorAll(".cal-day.open").forEach(d => d.classList.remove("open"));
+        });
+
         document.getElementById("cal-prev").onclick = () => shiftMonth(-1);
         document.getElementById("cal-next").onclick = () => shiftMonth(1);
 
@@ -100,7 +111,7 @@
             const nowMs = Date.now();
             const upcoming = allEvents.filter(e => e.when >= nowMs);
             if (upcoming.length === 0) {
-                sidebarEl.innerHTML = '<p class="cal-side-empty">No upcoming events.<br>Use !book in Discord.</p>';
+                sidebarEl.innerHTML = '<p class="cal-side-empty">No upcoming events.</p>';
             } else {
                 sidebarEl.innerHTML = upcoming.slice(0, 15).map(e =>
                     '<div class="cal-side-event">' +

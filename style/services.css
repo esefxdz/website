@@ -1,4 +1,5 @@
-/* to add a service copy a .svc-banner in index.html, --brand is the stripe color */
+/* to add a service copy a .svc-banner in index.html
+   --brand: the service's own color (stripe, glow, button), --brand-ink: text color on the button */
 
 /* tab header */
 .svc-header {
@@ -9,7 +10,7 @@
     font-size: 2.8rem;
     color: #fff;
     margin: 0;
-    text-shadow: 0 0 30px rgba(91, 111, 222, 0.5);
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
 }
 
 /* banner list */
@@ -23,23 +24,27 @@
 /* banner */
 .svc-banner {
     --brand: #5b6fde;
+    --brand-ink: #fff;
     display: flex;
     align-items: center;
     gap: 28px;
     padding: 28px 32px;
-    background: rgba(15, 15, 35, 0.55);
+    /* neutral dark glass with a faint wash of the service's color from the left */
+    background:
+        linear-gradient(90deg, color-mix(in srgb, var(--brand) 14%, transparent), transparent 55%),
+        rgba(14, 16, 22, 0.62);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(91, 111, 222, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-left: 4px solid var(--brand);
     border-radius: 16px;
     text-align: left;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 .svc-banner:hover {
-    border-color: rgba(91, 111, 222, 0.5);
+    border-color: color-mix(in srgb, var(--brand) 45%, transparent);
     border-left-color: var(--brand);
-    box-shadow: 0 6px 28px rgba(91, 111, 222, 0.12);
+    box-shadow: 0 6px 28px color-mix(in srgb, var(--brand) 18%, transparent);
 }
 
 .svc-logo {
@@ -47,6 +52,7 @@
     height: 64px;
     flex-shrink: 0;
     border-radius: 14px;
+    image-rendering: pixelated; /* keeps the pixel flag crisp */
 }
 
 .svc-info { flex: 1; min-width: 0; }
@@ -63,7 +69,7 @@
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.5;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.68);
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -71,16 +77,35 @@
     flex-shrink: 0;
     padding: 12px 24px;
     border-radius: 10px;
-    background: #5b6fde;
-    color: #fff;
+    background: var(--brand);
+    color: var(--brand-ink);
     font-weight: bold;
     text-decoration: none;
     white-space: nowrap;
-    transition: background 0.2s, box-shadow 0.2s;
+    transition: filter 0.2s, box-shadow 0.2s;
 }
 .svc-btn:hover {
-    background: #6d80ee;
-    box-shadow: 0 0 18px rgba(91, 111, 222, 0.5);
+    filter: brightness(1.1);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--brand) 55%, transparent);
+}
+
+/* live dot next to the name, filled in by js/services.js */
+.svc-name { display: flex; align-items: center; gap: 10px; }
+.svc-status {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: #8a8f98;
+}
+.svc-status[hidden] { display: none; }
+.svc-status.up {
+    background: #3ddc84;
+    box-shadow: 0 0 0 3px rgba(61, 220, 132, 0.18);
+}
+.svc-status.down {
+    background: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
 }
 .svc-btn:focus-visible {
     outline: 2px solid #fff;
